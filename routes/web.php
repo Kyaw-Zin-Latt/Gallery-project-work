@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,10 @@ Auth::routes();
 Route::prefix("dashboard")->middleware("auth")->group(function(){
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::resource("category",CategoryController::class);
+    Route::post("/publish","CategoryController@publish")->name("category.publish");
+    Route::post("/unPublish","CategoryController@unPublish")->name("category.unPublish");
+
 
 });

@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+
+        return view("category.index");
     }
 
     /**
@@ -24,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view("category.create");
     }
 
     /**
@@ -35,7 +36,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "title" => "required|min:3|unique:categories,title" ,
+//            "cover" => "required|mimes:jpg,png|file",
+//            "icon" => "required|mimes:jpg,png|file",
+        ]);
+
+        $category = new Category();
+        $category->title = $request->title;
+        $category->save();
+
+        return redirect()->route("category.index")->with("message","Category is added successfully.");
+
     }
 
     /**
@@ -81,5 +93,34 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+
+    public function publish(Request $request){
+
+        $request->validate([
+
+            "id" => "exists:categories,id"
+
+        ]);
+
+        $category = Category::find($request->id);
+        $category->is_publish = 1;
+        $category->update();
+
+        if ($category->update()){
+            return redirect()->route("category.index")->with("message","Category is published successfully.");
+        }else{
+            return redirect()->route("category.index")->with("error","Category is published unsuccessfully.");
+        }
+
+
+    }
+
+    public function unPublish(Request $request){
+        $category = Category::find($request->id);
+        $category->is_publish = 0;
+        $category->update();
+
+        return redirect()->route("category.index")->with("message","Category is unpublished successfully.");
     }
 }

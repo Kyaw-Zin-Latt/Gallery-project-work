@@ -16,105 +16,25 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                     <li class="nav-item has-treeview">
-                        <a href="http://localhost:8000/index.php/admin" class="nav-link">
-                            <i class="nav-icon fa fa-fw fa-tachometer"></i>
-                            <p>
-                                Dashboard              </p>
-                        </a>
+                        <x-menu-title title="Dashboard" class="fa fa-fw fa-tachometer" link="{{ route('home') }}"></x-menu-title>
                     </li>
 
                     <li class="nav-item has-treeview ">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon fa fa-fw fa-pencil-square-o"></i>
-                            <p>
-                                Entry
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
+                        <x-menu-title title="Entry" class="fa fa-fw fa-pencil-square-o"></x-menu-title>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/multipleupload/upload" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        Multiple Wallpaper Upload
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/massupload/upload" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        Mass Upload (CSV)
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/wallpapers" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        Wallpapers
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/colors" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        Colors
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/my_wallpapers" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        My Wallpapers
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/categories" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        Categories
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/my_categories" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        My Categories
-                                    </p>
-                                </a>
-                            </li>
+                            <x-menu-item title="Multiple Wallpaper Upload" link="{{ route('home') }}"></x-menu-item>
+                            <x-menu-item title="Mass Upload (CSV)" link=""></x-menu-item>
+                            <x-menu-item title="Wallpapers" link=""></x-menu-item>
+                            <x-menu-item title="Colors" link=""></x-menu-item>
+                            <x-menu-item title="Categories" link="{{ route('category.index') }}"></x-menu-item>
                         </ul>
                     </li>
 
                     <li class="nav-item has-treeview ">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon fa fa-fw fa-check-circle"></i>
-                            <p>
-                                Approval                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
+                        <x-menu-title title="Approval" class="fa fa-fw fa-check-circle"></x-menu-title>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/pendings" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        Pending
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="http://localhost:8000/index.php/admin/rejects" class="nav-link ">
-                                    <i class="fa fa-caret-right"></i>
-                                    <p>
-                                        Reject
-                                    </p>
-                                </a>
-                            </li>
+                            <x-menu-item title="Pending" link=""></x-menu-item>
+                            <x-menu-item title="Reject" link=""></x-menu-item>
                         </ul>
                     </li>
 
