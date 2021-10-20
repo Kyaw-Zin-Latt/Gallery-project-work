@@ -24,6 +24,11 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::get("/profile","ProfileController@edit")->name("profile.edit");
+    Route::post("/update","ProfileController@update")->name("profile.update");
+    Route::post("/update-photo","ProfileController@updatePhoto")->name("profile.updatePhoto");
+
+
     Route::resource("category",CategoryController::class);
     Route::post("/publish","CategoryController@publish")->name("category.publish");
     Route::post("/unPublish","CategoryController@unPublish")->name("category.unPublish");

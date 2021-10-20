@@ -18,8 +18,8 @@
 
 
         <li class="user user-menu">
-            <a href="http://localhost:8000/index.php/admin/profile" class="d-block">
-                <img src="http://localhost:8000/uploads/thumbnail/me.jpg" class="user-image" alt="User Image">
+            <a href="{{ route("profile.edit") }}" class="d-block">
+                <img src="{{ empty(Auth::user()->photo)  ? asset('dashboard/img/default.jpg') : asset('storage/profile/'.Auth::user()->photo) }}" class="user-image" alt="User Image">
                 <span class="hidden-xs">{{ Auth::user()->name }}</span>
             </a>
         </li>

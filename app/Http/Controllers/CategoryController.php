@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,8 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $categories = Category::with("photo")->latest()->paginate(10);
 
-        return view("category.index");
+        return view("category.index",compact("categories"));
     }
 
     /**
@@ -38,13 +40,56 @@ class CategoryController extends Controller
     {
         $request->validate([
             "title" => "required|min:3|unique:categories,title" ,
-//            "cover" => "required|mimes:jpg,png|file",
-//            "icon" => "required|mimes:jpg,png|file",
+            "cover" => "required|mimes:jpg,png|file",
+            "icon" => "required|mimes:jpg,png|file",
         ]);
 
+//        return getimagesize($request->cover);
+
         $category = new Category();
+        $category->id = "cat".uniqid();
         $category->title = $request->title;
         $category->save();
+
+        $coverDir = "/public/category/cover";
+        $iconDir = "/public/category/icon";
+
+        $coverNewFileName = uniqid()."_cover".$request->file("cover")->getClientOriginalExtension();
+        $iconNewFileName = uniqid()."_icon".$request->file("icon")->getClientOriginalExtension();
+
+        $request->file("cover")->storeAs($coverDir,$coverNewFileName);
+        $request->file("icon")->storeAs($iconDir,$iconNewFileName);
+
+
+
+
+
+        if (isset($request->icon)){
+            $photo = new Photo();
+            $photo->id = "img".uniqid();
+            $photo->parent_id = $category->id;
+            $photo->img_type = "category-icon";
+            $photo->photo = $iconNewFileName;
+            $photo->img_width = getimagesize($request->icon)[0];
+            $photo->img_height = getimagesize($request->icon)[1];
+            $photo->save();
+        }
+
+        if (isset($request->cover)){
+            $photo = new Photo();
+            $photo->id = "img".uniqid();
+            $photo->parent_id = $category->id;
+            $photo->img_type = "category";
+            $photo->photo = $coverNewFileName;
+            $photo->img_width = getimagesize($request->cover)[0];
+            $photo->img_height = getimagesize($request->cover)[1];
+            $photo->save();
+        }
+
+
+
+
+
 
         return redirect()->route("category.index")->with("message","Category is added successfully.");
 
@@ -69,7 +114,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view("category.edit",compact("category"));
     }
 
     /**

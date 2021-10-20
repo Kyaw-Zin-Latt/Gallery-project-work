@@ -86,7 +86,7 @@
                         Save
                     </button>
 
-                    <a href="" class="btn btn-sm btn-primary">
+                    <a href="{{ route("category.index") }}" class="btn btn-sm btn-primary">
                         Cancel
                     </a>
                 </div>
