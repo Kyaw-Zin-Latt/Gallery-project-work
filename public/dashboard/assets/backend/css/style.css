@@ -45,9 +45,9 @@ nav > .navbar-nav > .nav-link {
     border-radius: 10%;
 }
 
-.modal-backdrop{
-    position: unset !important;
-}
+/*.modal-backdrop{*/
+/*    position: unset !important;*/
+/*}*/
 
 table tr td{
     vertical-align: middle !important;

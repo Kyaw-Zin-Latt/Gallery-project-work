@@ -11,6 +11,7 @@
                     <h4 class="text-primary">Min Ga Lar Par</h4>
                     <p>
                         {{ $categories }}
+
                     </p>
                 </div>
             </div>

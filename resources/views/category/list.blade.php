@@ -1,3 +1,4 @@
+
 <div class="card" style="height: auto !important;">
     <div class="table-responsive animated fadeInRight">
         <table class="table m-0 table-striped">
@@ -14,7 +15,10 @@
             </tr>
 
             @forelse($categories as $key=>$cateogry)
+
+
                 <tr>
+
                     <td>{{ ++$key }}</td>
                     <td>{{ $cateogry->title }}</td>
                     <td>
@@ -26,14 +30,15 @@
                     </td>
                     {{--                        --}}{{--                    <td>36</td>--}}
                     <td>
-                        <a href="{{ route("category.edit",$cateogry->id) }}">
+                        <a href="{{ route("category.edit",$cateogry->id) }}" >
                             <i style="font-size: 18px;" class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
                     <td>
-                        <a herf="#" class="btn-delete" data-toggle="modal" data-target="#myModal" id="cata1c23f38c148f8ad46a16da94aefc613">
-                            <i style="font-size: 18px;" class="fa fa-trash-o"></i>
+                        <a href="{{ route('category.destroy',$cateogry->id) }}" id="{{ $cateogry->id }}" class="btn-delete" data-toggle="modal" data-target="#myModal">
+                            <i style="font-size: 18px;"  class="fa fa-trash-o"></i>
                         </a>
+
                     </td>
                     <td>
                         @if($cateogry->is_publish == 0)
@@ -62,6 +67,28 @@
 
             </tbody>
         </table>
+        {{ $categories->links() }}
+
     </div>
 
+
+
 </div>
+
+<x-delete-confirm-modal title="Category" name="category" delOnly="Category"></x-delete-confirm-modal>
+
+@section("foot")
+    <script>
+        $(".btn-delete").click(function(){
+
+            // get id and links
+
+            let id = $(this).attr('id');
+            var url = "{{route('category.destroy',':id')}}";
+            url = url.replace(":id",id);
+            console.log(id);
+            $("form").attr('action',url);
+
+        });
+    </script>
+@endsection

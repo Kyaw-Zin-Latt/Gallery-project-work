@@ -29,9 +29,13 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::post("/update-photo","ProfileController@updatePhoto")->name("profile.updatePhoto");
 
 
-    Route::resource("category",CategoryController::class);
+    Route::resource("/category",CategoryController::class);
     Route::post("/publish","CategoryController@publish")->name("category.publish");
     Route::post("/unPublish","CategoryController@unPublish")->name("category.unPublish");
+    Route::get("/search","CategoryController@search")->name("category.search");
+
+    Route::resource("photo",PhotoController::class);
+
 
 
 });

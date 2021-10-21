@@ -108,53 +108,7 @@
             </div>
 
         </form>
-        <div class="modal fade"  id="uploadProfile">
-
-            <div class="modal-dialog">
-
-                <div class="modal-content">
-
-                    <div class="modal-header">
-
-                        <h4 class="modal-title">Upload Photo</h4>
-
-                        <button class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                        </button>
-
-                    </div>
-
-                    <form action="{{ route("profile.updatePhoto") }}" id="form-model" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-
-                        <div class="form-group">
-
-                            <label class="form-control-label">Upload Photo</label>
-
-                            <br/>
-
-                            <input type="file" name="photo">
-
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-
-                        <input type="submit" value="Upload" form="form-model" class="btn btn-sm btn-primary"/>
-
-                        <a href='#' class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</a>
-
-                    </div>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
+        <x-photo-upload id="uploadProfile" formId="profile" name="photo" link="{{ route('profile.updatePhoto') }}"></x-photo-upload>
     </div>
 
 @endsection

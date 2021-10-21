@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with("photo")->latest()->paginate(10);
+        $categories = Category::with("photo")->latest()->paginate(5);
 
         return view("category.index",compact("categories"));
     }
@@ -54,8 +55,8 @@ class CategoryController extends Controller
         $coverDir = "/public/category/cover";
         $iconDir = "/public/category/icon";
 
-        $coverNewFileName = uniqid()."_cover".$request->file("cover")->getClientOriginalExtension();
-        $iconNewFileName = uniqid()."_icon".$request->file("icon")->getClientOriginalExtension();
+        $coverNewFileName = uniqid()."_cover.".$request->file("cover")->getClientOriginalExtension();
+        $iconNewFileName = uniqid()."_icon.".$request->file("icon")->getClientOriginalExtension();
 
         $request->file("cover")->storeAs($coverDir,$coverNewFileName);
         $request->file("icon")->storeAs($iconDir,$iconNewFileName);
@@ -85,11 +86,6 @@ class CategoryController extends Controller
             $photo->img_height = getimagesize($request->cover)[1];
             $photo->save();
         }
-
-
-
-
-
 
         return redirect()->route("category.index")->with("message","Category is added successfully.");
 
@@ -126,7 +122,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            "title" => "required|min:3|unique:categories,title,".$category->id,
+        ]);
+
+        $category->title = $request->title;
+        $category->update();
+
+        return redirect()->route("category.index")->with("message","Category is updated successfully.");
     }
 
     /**
@@ -137,7 +140,35 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+
+        if ($category->photo){
+
+            foreach ($category->photo as $p){
+                if ($p->img_type == "category"){
+                    $coverDir = "/public/category/cover";
+                    Storage::delete($coverDir.$p->photo);
+                }
+
+                if($p->img_type == "category-icon"){
+                    $iconDir = "/public/category/icon";
+                    Storage::delete($iconDir.$p->photo);
+                }
+            }
+
+            $toDel = $category->photo->pluck("id");
+            Photo::destroy($toDel);
+
+            $title = $category->title;
+            $category->delete();
+
+            return redirect()->route("category.index")->with("message","$title is deleted Successfully.");
+
+        }
+
+
+
+
+        return $category;
     }
 
     public function publish(Request $request){
@@ -167,5 +198,12 @@ class CategoryController extends Controller
         $category->update();
 
         return redirect()->route("category.index")->with("message","Category is unpublished successfully.");
+    }
+
+    public function search(Request $request){
+        $searchKey = $request->searchterm;
+        $categories = Category::where("title","LIKE","%$searchKey%")->paginate(5);
+
+        return view("category.search",compact("categories"));
     }
 }

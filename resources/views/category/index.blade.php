@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section("title") PS Wallpaper|Categories @endsection
+
+
 @section("content")
 
     <x-bread-crumb>
@@ -9,8 +12,8 @@
     <div class="row my-3">
 
         <div class="col-9">
-            <form action="http://localhost:8000/index.php/admin/categories/search" class="form-inline" method="post" accept-charset="utf-8">
-                <input type="hidden" name="csrf_test_name" value="dfe15d09970ce871b5d7520449c567fa">
+            <form action="{{ route("category.search") }}" class="form-inline" method="get" accept-charset="utf-8">
+
 
                 <div class="form-group mr-3">
 
@@ -55,5 +58,6 @@
     @include("category.list")
 
 {{--    table end--}}
+
 
 @endsection

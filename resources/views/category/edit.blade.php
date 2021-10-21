@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section("title") PS Wallpaper|Categories|Category Edit @endsection
+
 @section("content")
     <x-bread-crumb>
         <li class="breadcrumb-item"><a href="{{ route("category.index") }}">Categories</a></li>
@@ -22,9 +24,10 @@
                             <div class="form-group">
                                 <label>
                                     <span style="font-size: 17px; color: red;">*</span>
-                                    Category Name							<a href="#" class="tooltip-ps" data-toggle="tooltip" title="cat_name_tooltips">
-								<span class="glyphicon glyphicon-info-sign menu-icon">
-							</span></a>
+                                    Category Name
+                                    <a href="#" class="tooltip-ps" data-toggle="tooltip" title="cat_name_tooltips">
+								        <span class="glyphicon glyphicon-info-sign menu-icon"></span>
+                                    </a>
                                 </label>
 
                                 <input type="text" name="title" value="{{ old("title",$category->title) }}" class="form-control form-control-sm @error("title") is-invalid @enderror" placeholder="Category Name" id="cat_name">
@@ -37,9 +40,10 @@
 
                         <div class="col-md-6" style="padding-left: 50px;">
                             <span style="font-size: 17px; color: red;">*</span>
-                            <label>Category Cover Photo							<a href="#" class="tooltip-ps" data-toggle="tooltip" title="cat_photo_tooltips">
-								<span class="glyphicon glyphicon-info-sign menu-icon">
-							</span></a>
+                            <label>Category Cover Photo
+                                <a href="#" class="tooltip-ps" data-toggle="tooltip" title="cat_photo_tooltips">
+								    <span class="glyphicon glyphicon-info-sign menu-icon"></span>
+                                </a>
                             </label>
 
                             <div class="btn btn-sm btn-primary btn-upload pull-right" data-toggle="modal" data-target="#uploadImage">
@@ -52,7 +56,8 @@
                                 <div class="col-md-4" style="height:100">
                                     <div class="thumbnail">
                                         @foreach($photos as $p)
-                                            @if($p->img_type == "category")
+
+                                            @if($p->img_type == "category" && $category->id == $p->parent_id)
                                                 <img width="150px" class="rounded" src="{{ asset("storage/category/cover/".$p->photo) }}">
                                             @endif
                                         @endforeach
@@ -84,7 +89,7 @@
                                     <div class="thumbnail">
 
                                         @foreach($photos as $p)
-                                            @if($p->img_type == "category-icon")
+                                            @if($p->img_type == "category-icon" && $category->id == $p->parent_id)
                                                 <img width="150px" class="rounded" src="{{ asset("storage/category/icon/".$p->photo) }}">
                                             @endif
                                         @endforeach
@@ -111,7 +116,7 @@
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-sm btn-primary">
-                        Save
+                        Update
                     </button>
 
                     <a href="{{ route("category.index") }}" class="btn btn-sm btn-primary">
@@ -123,10 +128,16 @@
             <!-- card info -->
         </section>
 
-
-
-
-
     </form>
+    @foreach($photos as $p)
+        @if($p->img_type == "category-icon")
+            <x-photo-upload name="icon" id="uploadIcon" formId="icon" link="{{ route('photo.update',$p->id) }}"></x-photo-upload>
+
+        @else
+            <x-photo-upload name="cover" id="uploadImage" formId="cover" link="{{ route('photo.update',$p->id) }}"></x-photo-upload>
+        @endif
+    @endforeach
+
+
 
 @endsection
