@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section("title") PS Wallpaper|Categories @endsection
+@section("title") PS Wallpaper|Colors @endsection
 
 
 @section("content")
 
     <x-bread-crumb>
-        <li class="breadcrumb-item active" aria-current="page">Categories</li>
+        <li class="breadcrumb-item active" aria-current="page">Colors</li>
     </x-bread-crumb>
 
     <div class="row my-3">
 
         <div class="col-9">
-            <form action="{{ route('category.search') }}" class="form-inline" method="get" accept-charset="utf-8">
+            <form action="{{ route("color.search") }}" class="form-inline" method="get" accept-charset="utf-8">
 
 
                 <div class="form-group mr-3">
@@ -53,11 +53,11 @@
     </div>
 
     <br>
-{{--    table start--}}
+    {{--    table start--}}
 
-    @include("category.list")
+    @include("color.list")
 
-{{--    table end--}}
+    {{--    table end--}}
 
 
 @endsection
