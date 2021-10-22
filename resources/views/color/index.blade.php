@@ -55,7 +55,6 @@
     <br>
     {{--    table start--}}
 
-    @include("color.list")
 
     {{--    table end--}}
 
