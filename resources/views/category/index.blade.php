@@ -12,7 +12,7 @@
     <div class="row my-3">
 
         <div class="col-9">
-            <form action="{{ route("category.search") }}" class="form-inline" method="get" accept-charset="utf-8">
+            <form action="{{ route('category.search') }}" class="form-inline" method="get" accept-charset="utf-8">
 
 
                 <div class="form-group mr-3">
