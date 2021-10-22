@@ -34,6 +34,9 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::post("/unPublish","CategoryController@unPublish")->name("category.unPublish");
     Route::get("/search","CategoryController@search")->name("category.search");
 
+    Route::resource("/color",ColorController::class);
+    Route::get("/search","ColorController@search")->name("color.search");
+
     Route::resource("photo",PhotoController::class);
 
 
