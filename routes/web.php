@@ -43,6 +43,8 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::get("/abouts","AboutAndSettingController@edit")->name("abouts.edit");
     Route::post("/abouts","AboutAndSettingController@update")->name("abouts.update");
 
+    Route::resource("backend_configs",BackendConfigController::class);
+
 
 
 });

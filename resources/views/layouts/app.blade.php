@@ -5,7 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield("title","PS Wallpaper|Dashboard")</title>
-    <link rel="icon" href="http://localhost:8000/uploads/favicon.ico">
+    @foreach($photos as $p)
+        @if($p->img_type == "favicon")
+            <link rel="icon" href="{{ asset("storage/backend/favicon/".$p->photo) }}">
+        @endif
+    @endforeach
+
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset("dashboard/assets/backend/css/animate.css") }}">

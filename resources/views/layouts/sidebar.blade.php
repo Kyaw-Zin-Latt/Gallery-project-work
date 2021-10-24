@@ -42,6 +42,8 @@
                         <x-menu-title title="Setting" class="fa fa-fw fa-cog"></x-menu-title>
                         <ul class="nav nav-treeview">
                             <x-menu-item title="About & Setting" link="{{ route('abouts.edit') }}"></x-menu-item>
+                            <x-menu-item title="Backend Setting" link="{{ route('backend_configs.edit',$backend->id) }}"></x-menu-item>
+
 
                         </ul>
                     </li>

@@ -153,6 +153,58 @@ class PhotoController extends Controller
             return redirect()->route("abouts.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
         }
 
+        if (isset($request->favicon)){
+//            return $request;
+            $request->validate([
+                "favicon" => "required|mimes:jpg,png|file",
+            ]);
+
+            $dir = "/public/backend/favicon/";
+
+            //firstly, delete old photo from local
+            Storage::delete($dir.$photo->photo);
+
+
+            $newFileName = uniqid()."_fav.".$request->file("favicon")->getClientOriginalExtension();
+
+            //update in local
+            $request->file("favicon")->storeAs($dir,$newFileName);
+
+            //update in db
+
+            $photo->photo = $newFileName;
+            $photo->img_height= getimagesize($request->favicon)[1];
+            $photo->img_width = getimagesize($request->favicon)[0];
+            $photo->update();
+            return redirect()->route("backend_configs.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
+        }
+
+        if (isset($request->login_bg)){
+//            return $request;
+            $request->validate([
+                "login_bg" => "required|mimes:jpg,png|file",
+            ]);
+
+            $dir = "/public/backend/login_bg/";
+
+            //firstly, delete old photo from local
+            Storage::delete($dir.$photo->photo);
+
+
+            $newFileName = uniqid()."_loginBg.".$request->file("login_bg")->getClientOriginalExtension();
+
+            //update in local
+            $request->file("login_bg")->storeAs($dir,$newFileName);
+
+            //update in db
+
+            $photo->photo = $newFileName;
+            $photo->img_height= getimagesize($request->login_bg)[1];
+            $photo->img_width = getimagesize($request->login_bg)[0];
+            $photo->update();
+            return redirect()->route("backend_configs.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
+        }
+
 
         return redirect()->back()->with("message","Photo updated is failed.");
 
