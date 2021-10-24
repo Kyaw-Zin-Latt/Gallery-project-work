@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\AboutAndSetting;
 use App\Models\Category;
 use App\Models\Photo;
 use Illuminate\Pagination\Paginator;
@@ -31,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         View::share("categories",Category::with("photo")->latest('id')->get());
         View::share("photos",Photo::latest("id")->get());
+//        View::share("abouts",AboutAndSetting::first());
     }
 }

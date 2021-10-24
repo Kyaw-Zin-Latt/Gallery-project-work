@@ -70,9 +70,8 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-
+//        return $request;
         //update category cover photo start
-
         if (isset($request->cover)){
 
             $request->validate([
@@ -95,11 +94,10 @@ class PhotoController extends Controller
             $photo->img_width = getimagesize($request->cover)[0];
             $photo->img_height = getimagesize($request->cover)[1];
             $photo->update();
+            return redirect()->route("category.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
+
         }
-
         //update category cover photo end
-
-//        return $request;
 
         //update category icon photo start
         if (isset($request->icon)){
@@ -125,12 +123,38 @@ class PhotoController extends Controller
             $photo->img_width = getimagesize($request->icon)[0];
             $photo->img_height = getimagesize($request->icon)[1];
             $photo->update();
-        }
+            return redirect()->route("category.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
 
+        }
         //update category icon photo end
 
+        if (isset($request->about_photo)){
+            $request->validate([
+                "about_photo" => "required|mimes:jpg,png|file",
+            ]);
 
-        return redirect()->route("category.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
+            $dir = "/public/about/";
+
+            //firstly, delete old photo from local
+            Storage::delete($dir.$photo->photo);
+
+
+            $newFileName = uniqid()."_about.".$request->file("about_photo")->getClientOriginalExtension();
+
+            //update in local
+            $request->file("about_photo")->storeAs($dir,$newFileName);
+
+            //update in db
+
+            $photo->photo = $newFileName;
+            $photo->img_height= getimagesize($request->about_photo)[1];
+            $photo->img_width = getimagesize($request->about_photo)[0];
+            $photo->update();
+            return redirect()->route("abouts.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
+        }
+
+
+        return redirect()->back()->with("message","Photo updated is failed.");
 
     }
 

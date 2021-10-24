@@ -38,6 +38,13 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item has-treeview ">
+                        <x-menu-title title="Setting" class="fa fa-fw fa-cog"></x-menu-title>
+                        <ul class="nav nav-treeview">
+                            <x-menu-item title="About & Setting" link="{{ route('abouts.edit') }}"></x-menu-item>
+                        </ul>
+                    </li>
+
                 </ul>
             </nav>
             <!-- Sidebar Menu End  -->

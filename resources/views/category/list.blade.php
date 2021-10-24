@@ -67,14 +67,14 @@
 
             </tbody>
         </table>
-        {{ $categories->links() }}
+
 
     </div>
 
 
 
 </div>
-
+{{ $categories->links() }}
 <x-delete-confirm-modal title="Category" name="category" delOnly="Category"></x-delete-confirm-modal>
 
 @section("foot")

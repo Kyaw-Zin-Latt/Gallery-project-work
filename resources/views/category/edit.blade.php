@@ -129,10 +129,10 @@
         </section>
 
     </form>
+
     @foreach($photos as $p)
         @if($p->img_type == "category-icon")
             <x-photo-upload name="icon" id="uploadIcon" formId="icon" link="{{ route('photo.update',$p->id) }}"></x-photo-upload>
-
         @else
             <x-photo-upload name="cover" id="uploadImage" formId="cover" link="{{ route('photo.update',$p->id) }}"></x-photo-upload>
         @endif

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Color;
 use Illuminate\Http\Request;
+use LVR\Colour\Hex;
 
 class ColorController extends Controller
 {
@@ -14,7 +15,8 @@ class ColorController extends Controller
      */
     public function index()
     {
-        return view("color.index");
+        $colors = Color::latest("id")->paginate(10);
+        return view("color.index",compact('colors'));
     }
 
     /**
@@ -24,7 +26,8 @@ class ColorController extends Controller
      */
     public function create()
     {
-        //
+
+        return view("color.create");
     }
 
     /**
@@ -35,7 +38,21 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+
+            "title" => "required|min:3|unique:colors,name",
+            "code" => ['required', new Hex],
+
+        ]);
+
+        $color = new Color();
+        $color->id = "color".uniqid();
+        $color->name = $request->title;
+        $color->code = $request->code;
+        $color->save();
+
+        return redirect()->route("color.index")->with("message","Color is added successfully.");
     }
 
     /**
@@ -57,7 +74,7 @@ class ColorController extends Controller
      */
     public function edit(Color $color)
     {
-        //
+        return view("color.edit",compact('color'));
     }
 
     /**
@@ -69,7 +86,19 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        //
+        $request->validate([
+
+            "title" => "required|min:3|unique:colors,name,".$color->id,
+            "code" => ['required', new Hex],
+
+        ]);
+
+
+        $color->name = $request->title;
+        $color->code = $request->code;
+        $color->update();
+
+        return redirect()->route("color.index")->with("message","Color is updated successfully.");
     }
 
     /**
@@ -80,6 +109,17 @@ class ColorController extends Controller
      */
     public function destroy(Color $color)
     {
-        //
+        $title = $color->name;
+        $color->delete();
+
+        return redirect()->route("color.index")->with("message","$title color is deleted successfully.");
+
+    }
+
+    public function search(Request $request){
+
+        $colors = Color::where("name","LIKE","%$request->searchterm%")->paginate(10);
+
+        return view("color.search",compact('colors'));
     }
 }

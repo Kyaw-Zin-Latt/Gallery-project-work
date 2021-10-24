@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Color;
+use App\Models\AboutAndSetting;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ColorFactory extends Factory
+class AboutAndSettingFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Color::class;
+    protected $model = AboutAndSetting::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class ColorFactory extends Factory
     public function definition()
     {
         return [
-            'id' => "color".uniqid(),
-            'name' => $this->faker->colorName(),
-            'code' => $this->faker->hexColor(),
+            //
         ];
     }
 }

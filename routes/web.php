@@ -32,15 +32,16 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::resource("/category",CategoryController::class);
     Route::post("/publish","CategoryController@publish")->name("category.publish");
     Route::post("/unPublish","CategoryController@unPublish")->name("category.unPublish");
-    Route::get("/search","CategoryController@search")->name("category.search");
+    Route::get("/categories/search","CategoryController@search")->name("category.search");
 
 
-    Route::resource("/color",ColorController::class);
-
-
-    Route::get("/search","ColorController@search")->name("color.search");
+    Route::resource("/color","ColorController");
+    Route::get("/colors/search","ColorController@search")->name("color.search");
 
     Route::resource("photo",PhotoController::class);
+
+    Route::get("/abouts","AboutAndSettingController@edit")->name("abouts.edit");
+    Route::post("/abouts","AboutAndSettingController@update")->name("abouts.update");
 
 
 
