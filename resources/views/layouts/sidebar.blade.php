@@ -4,7 +4,11 @@
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="http://localhost:8000/uploads/wp_logo_121.png" class="img-circle elevation-2" alt="User Image">
+                    @foreach($photos as $p)
+                        @if($p->img_type == "logo")
+                            <img src="{{ asset('storage/backend/logo/'.$p->photo) }}" width="100px" alt="">
+                        @endif
+                    @endforeach
                 </div>
                 <div class="info" style="font-size: 14px; color: #fff; font-weight: bold;">
                     PSWallpers Admin Panel

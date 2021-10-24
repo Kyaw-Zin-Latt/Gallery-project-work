@@ -23,7 +23,11 @@
                 <div class="row">
                     <div class="col-md-4" style="height:100">
                         <div class="thumbnail">
-                            <img src="http://localhost:8000/uploads/thumbnail/9-hl-afp_82.jpg">
+                            @foreach($photos as $p)
+                                @if($p->img_type == "logo")
+                                    <img src="{{ asset('storage/backend/logo/'.$p->photo) }}" width="100px" alt="">
+                                @endif
+                            @endforeach
                             <br>
                             <p class="text-center">
                                 <a data-toggle="modal" data-target="#deletePhoto" class="delete-img" id="img7e34001b7ddd924ae80761c19d2727e0" image="9-hl-afp_82.jpg">
@@ -99,7 +103,7 @@
         @elseif($p->img_type == "login-bg")
             <x-photo-upload name="login_bg" id="uploadImage" formId="login-bg-photo" link="{{ route('photo.update',$p->id) }}"></x-photo-upload>
         @elseif($p->img_type == "logo")
-
+            <x-photo-upload name="logo" id="uploadlogo" formId="logo-photo" link="{{ route('photo.update',$p->id) }}"></x-photo-upload>
         @endif
     @endforeach
 

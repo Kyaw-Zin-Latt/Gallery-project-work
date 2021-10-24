@@ -179,6 +179,33 @@ class PhotoController extends Controller
             return redirect()->route("backend_configs.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
         }
 
+        if (isset($request->logo)){
+//            return $request;
+            $request->validate([
+                "logo" => "required|mimes:jpg,png|file",
+            ]);
+
+            $dir = "/public/backend/logo/";
+
+            //firstly, delete old photo from local
+            Storage::delete($dir.$photo->photo);
+
+
+            $newFileName = uniqid()."_logo.".$request->file("logo")->getClientOriginalExtension();
+
+            //update in local
+            $request->file("logo")->storeAs($dir,$newFileName);
+
+            //update in db
+
+            $photo->photo = $newFileName;
+            $photo->img_height= getimagesize($request->logo)[1];
+            $photo->img_width = getimagesize($request->logo)[0];
+            $photo->update();
+            return redirect()->route("backend_configs.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
+        }
+
+
         if (isset($request->login_bg)){
 //            return $request;
             $request->validate([
