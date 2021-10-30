@@ -29,7 +29,7 @@
 
                 <div class="row">
                     <div class="form-group ml-3">
-                        <a href="{{ route('category.index') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('color.index') }}" class="btn btn-sm btn-primary">
                             Reset
                         </a>
                     </div>
@@ -39,9 +39,9 @@
         </div>
 
         <div class="col-3">
-            <a href="{{ route("category.create") }}" class="btn btn-sm btn-primary pull-right">
+            <a href="{{ route("color.create") }}" class="btn btn-sm btn-primary pull-right">
                 <span class="fa fa-plus"></span>
-                Add Category
+                Add Color
             </a>
         </div>
 
@@ -55,6 +55,7 @@
     <br>
     {{--    table start--}}
 
+    @include("color.list")
 
     {{--    table end--}}
 

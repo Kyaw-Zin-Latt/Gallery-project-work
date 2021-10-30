@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateColorsTable extends Migration
+class CreateVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateColorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('colors', function (Blueprint $table) {
+        Schema::create('versions', function (Blueprint $table) {
             $table->string("id")->primary();
-            $table->string("name");
-            $table->string("code");
+            $table->string("version_no");
+            $table->tinyInteger("version_force_update");
+            $table->string("version_title");
+            $table->text("version_message");
+            $table->tinyInteger("version_need_clear_data");
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateColorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('versions');
     }
 }

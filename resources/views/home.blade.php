@@ -8,7 +8,9 @@
         <div class="col-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="text-primary">Min Ga Lar Par</h4>
+                    <h4 class="text-primary">
+                        @lang('msg.welcome')
+                    </h4>
                     <p>
                         {{ $categories }}
 

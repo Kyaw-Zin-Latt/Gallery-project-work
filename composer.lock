@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7135ce4aa5b0fb82d8a4f8347853b3e",
+    "content-hash": "a9b99b0a67e227e423af2a64093e3ce8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -961,6 +961,59 @@
                 }
             ],
             "time": "2021-10-06T17:43:30+00:00"
+        },
+        {
+            "name": "laravel-validation-rules/colour",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-validation-rules/colour.git",
+                "reference": "4c5f337ac03d9c6ebfc9fe771aa19bdb7ae47b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-validation-rules/colour/zipball/4c5f337ac03d9c6ebfc9fe771aa19bdb7ae47b32",
+                "reference": "4c5f337ac03d9c6ebfc9fe771aa19bdb7ae47b32",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.5|^6.0|^7.0|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LVR\\Colour\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ashley Clarke",
+                    "email": "me@ashleyclarke.me"
+                },
+                {
+                    "name": "Scott Robinson",
+                    "email": "scott@dor.ky"
+                }
+            ],
+            "description": "Validate colours",
+            "keywords": [
+                "colour",
+                "laravel",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-validation-rules/colour/issues",
+                "source": "https://github.com/laravel-validation-rules/colour/tree/1.5.0"
+            },
+            "time": "2020-09-16T14:18:52+00:00"
         },
         {
             "name": "laravel/framework",

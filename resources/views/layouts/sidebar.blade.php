@@ -4,7 +4,11 @@
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="http://localhost:8000/uploads/wp_logo_121.png" class="img-circle elevation-2" alt="User Image">
+                    @foreach($photos as $p)
+                        @if($p->img_type == "logo")
+                            <img src="{{ asset('storage/backend/logo/'.$p->photo) }}" width="100px" alt="">
+                        @endif
+                    @endforeach
                 </div>
                 <div class="info" style="font-size: 14px; color: #fff; font-weight: bold;">
                     PSWallpers Admin Panel
@@ -35,6 +39,17 @@
                         <ul class="nav nav-treeview">
                             <x-menu-item title="Pending" link=""></x-menu-item>
                             <x-menu-item title="Reject" link=""></x-menu-item>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview ">
+                        <x-menu-title title="Setting" class="fa fa-fw fa-cog"></x-menu-title>
+                        <ul class="nav nav-treeview">
+                            <x-menu-item title="About & Setting" link="{{ route('abouts.edit') }}"></x-menu-item>
+                            <x-menu-item title="Version" link="{{ route('versions.edit',$version->id) }}"></x-menu-item>
+                            <x-menu-item title="Backend Setting" link="{{ route('backend_configs.edit',$backend->id) }}"></x-menu-item>
+
+
                         </ul>
                     </li>
 
