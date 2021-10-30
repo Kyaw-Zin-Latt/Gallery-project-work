@@ -35,6 +35,9 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::get("/categories/search","CategoryController@search")->name("category.search");
 
 
+    Route::resource("/wallpapers","WallpaperController");
+
+
     Route::resource("/color","ColorController");
     Route::get("/colors/search","ColorController@search")->name("color.search");
 
