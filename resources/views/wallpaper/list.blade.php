@@ -17,56 +17,63 @@
                 <th><span class="th-title">Publish</span></th>
             </tr>
 
-{{--            @forelse($categories as $key=>$cateogry)--}}
+            @forelse($wallpapers as $key=>$wallpaper)
 
             <tr>
                 <td>1</td>
-                <td>Testing</td>
-                <td>Experimental</td>
+                <td>{{ $wallpaper->wallpaper_name }}</td>
+                <td>{{ $wallpaper->category[0]->title }}</td>
                 <td>
-                    <img class="rounded" src="{{ asset("storage/backend/login_bg/6175282dc30fa_loginBg.jpeg") }}" width="150px" alt="">
+                    @foreach($wallpaper->photo as $p)
+                        @if($p->img_type == "wallpaper")
+                            <img width="150px" class="rounded" src="{{ asset("storage/wallpaper/Image/$p->photo") }}">
+                        @endif
+                    @endforeach
+                <td>
+                    @if($wallpaper->types == "1")
+                        <button class="btn btn-success">Free</button>
+                    @else
+                        <button class="btn btn-danger">Premium</button>
+                    @endif
+                </td>
+                <td>{{ $wallpaper->point }}</td>
+                <td>{{ $wallpaper->user[0]->name }}</td>
+                <td>
+                    <a href="{{ route("wallpapers.edit",$wallpaper->wallpaper_id) }}" >
+                        <i style="font-size: 18px;" class="fa fa-pencil-square-o"></i>
+                    </a>
                 </td>
                 <td>
-                    <button class="btn btn-success">Free</button>
-                </td>
-                <td>0</td>
-                <td>Kyaw Zin Latt</td>
-{{--                <td>--}}
-{{--                    <a href="{{ route("category.edit",$wallpaper->id) }}" >--}}
-{{--                        <i style="font-size: 18px;" class="fa fa-pencil-square-o"></i>--}}
-{{--                    </a>--}}
-{{--                </td>--}}
-{{--                <td>--}}
-{{--                    <a href="{{ route('wallpapers.destroy',$wallpaper->id) }}" id="{{ $wallpaper->id }}" class="btn-delete" data-toggle="modal" data-target="#myModal">--}}
-{{--                        <i style="font-size: 18px;"  class="fa fa-trash-o"></i>--}}
-{{--                    </a>--}}
+                    <a href="{{ route('wallpapers.destroy',$wallpaper->wallpaper_id) }}" id="{{ $wallpaper->wallpaper_id }}" class="btn-delete" data-toggle="modal" data-target="#myModal">
+                        <i style="font-size: 18px;"  class="fa fa-trash-o text-danger"></i>
+                    </a>
 
-{{--                </td>--}}
-{{--                <td>--}}
-{{--                    @if($wallpaper->is_publish == 0)--}}
-{{--                        <form action="{{ route("wallpapers.publish") }}" method="post">--}}
-{{--                            @csrf--}}
-{{--                            <input type="hidden" name="id" value="{{ $wallpaper->id }}">--}}
-{{--                            <button class="btn btn-sm btn-danger">--}}
-{{--                                No--}}
-{{--                            </button>--}}
-{{--                        </form>--}}
-{{--                    @else--}}
-{{--                        <form action="{{ route("wallpapers.unPublish") }}" method="post">--}}
-{{--                            @csrf--}}
-{{--                            <input type="hidden" name="id" value="{{ $wallpaper->id }}">--}}
-{{--                            <button class="btn btn-sm btn-success">--}}
-{{--                                Yes--}}
-{{--                            </button>--}}
-{{--                        </form>--}}
-{{--                    @endif--}}
-{{--                </td>--}}
+                </td>
+                <td>
+                    @if($wallpaper->is_publish == 0)
+                        <form action="{{ route("wallpapers.publish") }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $wallpaper->wallpaper_id }}">
+                            <button class="btn btn-sm btn-danger">
+                                No
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route("wallpapers.unPublish") }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $wallpaper->wallpaper_id }}">
+                            <button class="btn btn-sm btn-success">
+                                Yes
+                            </button>
+                        </form>
+                    @endif
+                </td>
 
             </tr>
 
-{{--            @empty--}}
-{{--                <td colspan="6" class="text-center font-weight-bold h5">There is no Category yet.</td>--}}
-{{--            @endforelse--}}
+            @empty
+                <td colspan="6" class="text-center font-weight-bold h5">There is no Category yet.</td>
+            @endforelse
 
             </tbody>
         </table>

@@ -6,8 +6,8 @@
         <li class="breadcrumb-item active" aria-current="page">Add Wallpaper</li>
     </x-bread-crumb>
 
-    <form action="http://localhost/pswallpapers-admin/index.php/admin/wallpapers/add" id="wallpaper-form" enctype="multipart/form-data" method="post" accept-charset="utf-8" novalidate="novalidate">
-        <input type="hidden" name="csrf_test_name" value="ec63c441e8834701bfa7a47283a1c944">
+    <form action="{{ route("wallpapers.store") }}" id="wallpaper-form" enctype="multipart/form-data" method="post" accept-charset="utf-8" novalidate="novalidate">
+        @csrf
 
         <section class="content animated fadeInRight">
             <div class="card card-info">
@@ -24,7 +24,8 @@
                                     Wallpaper Name
                                 </label>
 
-                                <input type="text" name="wallpaper_name" value="" class="form-control form-control-sm" placeholder="Wallpaper Name" id="wallpaper_name">
+                                <input type="text" name="wallpaper_name" value="{{ old("wallpaper_name") }}" class="form-control form-control-sm" placeholder="Wallpaper Name" id="wallpaper_name">
+                                <x-form-error name="wallpaper_name"></x-form-error>
 
                             </div>
 
@@ -36,10 +37,12 @@
                                 </label>
 
                                 <select class="form-control" name="types" id="types">
-                                    <option value="0">Select Wallpaper Types</option>
-                                    <option value="1">Free</option>
-                                    <option value="2">Premium</option>
+                                    <option value="">Select Wallpaper Types</option>
+                                    <option value="1" @if (old("types") == "1") selected="selected" @endif>Free</option>
+                                    <option value="2" @if (old("types") == "2") selected="selected" @endif>Premium</option>
                                 </select>
+                                <x-form-error name="types"></x-form-error>
+
                             </div>
 
                             <div class="form-group">
@@ -47,7 +50,8 @@
                                     <span style="font-size: 17px; color: red;">*</span>
                                     Wallpaper Point
                                 </label>
-                                <input type="text" name="point" value="" class="form-control form-control-sm" placeholder="Wallpaper Point" id="point">
+                                <input type="text" name="point" value="{{ old("point") }}" class="form-control form-control-sm" placeholder="Wallpaper Point" id="point">
+                                <x-form-error name="point"></x-form-error>
                             </div>
 
                             <label>
@@ -71,15 +75,15 @@
 
                                         <label>
                                             <span style="font-size: 17px; color: red;">*</span>
-                                            Wallpaper Image											<a href="#" class="tooltip-ps" data-toggle="tooltip" title="Wallpaper Photo">
-												<span class="glyphicon glyphicon-info-sign menu-icon">
-											</span></a>
+                                            Wallpaper Image
                                         </label>
 
                                         <br>
 
                                         <input class="btn btn-sm" type="file" id="images1" name="images1">
                                         <input type="hidden" name="is_gif" id="is_gif">
+                                        <x-form-error name="images1"></x-form-error>
+
                                     </div>
 
 
@@ -91,9 +95,7 @@
                                     <div class="form-group">
                                         <label>
                                             <span style="font-size: 17px; color: red;">*</span>
-                                            Video Upload											<a href="#" class="tooltip-ps" data-toggle="tooltip" title="video_icon_tooltips">
-												<span class="glyphicon glyphicon-info-sign menu-icon">
-											</span></a>
+                                            Video Upload
                                         </label>
 
                                         <br>
@@ -129,23 +131,17 @@
                             <div class="form-group">
                                 <label>
                                     <span style="font-size: 17px; color: red;">*</span>
-                                    Category Name							<a href="#" class="tooltip-ps" data-toggle="tooltip" title="cat_name_tooltips">
-								<span class="glyphicon glyphicon-info-sign menu-icon">
-							</span></a>
+                                    Category Name
                                 </label>
 
                                 <select name="cat_id" class="form-control form-control-sm mr-3" id="cat_id">
-                                    <option value="0">Select Category Name</option>
-                                    <option value="catff78e482420e87428dc99a8676cdb044">Experimental</option>
-                                    <option value="catfde11761cfd0701b531e848cdbd9d319">Texture</option>
-                                    <option value="cat8188f8fe18417862104bd75a040f3003">Nature</option>
-                                    <option value="cat64f320906b56c350b8f550d4184eda25">Arts</option>
-                                    <option value="catbe172b222a67ca6841a10f6e46520130">Fashion</option>
-                                    <option value="cat8fc41fdbf43f915947e1c42e5fa4cd3c">Flowers</option>
-                                    <option value="cat6e812d4794d2560427c584e0bb3d20ce">Travel</option>
-                                    <option value="catb107b7089daa6c60291e2bedfdd14d2b">Business</option>
-                                    <option value="cata1c23f38c148f8ad46a16da94aefc613">Animal</option>
+                                    <option value="">Select Category Name</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" @if (old("cat_id") == $category->id) selected="selected" @endif>{{ $category->title }}</option>
+                                    @endforeach
                                 </select>
+                                <x-form-error name="cat_id"></x-form-error>
+
 
                             </div>
 
@@ -154,21 +150,13 @@
                                     Select Color						</label>
 
                                 <select name="color_id" class="form-control form-control-sm mr-3" id="color_id">
-                                    <option value="0">Select Color</option>
-                                    <option value="color680fdd9a6d27c0fbe773e7e032aa9a15">sdfdfsf</option>
-                                    <option value="color2a410de2eb2ad814b187630f35bbcf64">Gray</option>
-                                    <option value="color4dbae180244cbc38bee88d28901f0262">Brown</option>
-                                    <option value="colora33b2b3d5645a43ca001650f71cbe8e2">Blue-Violet</option>
-                                    <option value="colorf39406c56c157377182925eb963a582d">Violet</option>
-                                    <option value="color7085f4286925c2637e9bf56e3272ba38">Red</option>
-                                    <option value="colord062947b5f674ecaab1b8ef38584ae5a">Blue</option>
-                                    <option value="colorfd871fc57c1917f57983564f08fa5a9a">Orange</option>
-                                    <option value="color73d7d90277ab57354cbe0e9499b6f6f6">Pink</option>
-                                    <option value="color8a4cc832b57285200c9471f368757eb9">Black</option>
-                                    <option value="color745b0bbc500d3db4ff7aeceaa22cb6b3">Green</option>
-                                    <option value="colorce9fe9b577a47bbdeeedce1f73574f0b">White</option>
-                                    <option value="color96b0e5b72ea9752aeff46ca8fd41ed7d">Yellow</option>
+                                    <option value="">Select Color</option>
+                                    @foreach($colors as $color)
+                                        <option value="{{ $color->id }}" @if (old("color_id") == $color->id) selected="selected" @endif>{{ $color->name }}</option>
+                                    @endforeach
                                 </select>
+                                <x-form-error name="color_id"></x-form-error>
+
 
                             </div>
 
@@ -185,7 +173,8 @@
 
                             <div class="form-group">
                                 <label>
-                                    Credit							<a href="#" class="tooltip-ps" data-toggle="tooltip" title="Wallpaper Search Tags">
+                                    Credit
+                                    <a href="#" class="tooltip-ps" data-toggle="tooltip" title="Wallpaper Search Tags">
 								<span class="glyphicon glyphicon-info-sign menu-icon">
 							</span></a>
                                 </label>
@@ -219,12 +208,14 @@
                             </div><br>
 
                             <div class="form-group">
-                                <label>Wallpaper Modes													</label>
-                            </div><br><br>
+                                <label>Wallpaper Modes</label>
+                            </div>
+                            <br><br>
 
                             <div class="form-group">
                                 <label> <span style="font-size: 17px; color: red;"></span>
-                                    Product Dynamic Link : 		              </label>
+                                    Product Dynamic Link :
+                                </label>
                             </div>
                             <br><br>
 
@@ -241,10 +232,12 @@
 
                 <div class="card-footer">
                     <button type="submit" value="submit" name="submit" class="btn btn-sm btn-primary">
-                        Save			</button>
+                        Save
+                    </button>
 
-                    <a href="http://localhost/pswallpapers-admin/index.php/admin/wallpapers" class="btn btn-sm btn-primary">
-                        Cancel			</a>
+                    <a href="{{ route("wallpapers.index") }}" class="btn btn-sm btn-primary">
+                        Cancel
+                    </a>
                 </div>
 
             </div>
