@@ -50,7 +50,7 @@
 
                 </td>
                 <td>
-                    @if($wallpaper->is_publish == 0)
+                    @if($wallpaper->wallpaper_is_published == 0)
                         <form action="{{ route("wallpapers.publish") }}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{ $wallpaper->wallpaper_id }}">
@@ -85,7 +85,7 @@
 
 </div>
 {{--{{ $categories->links() }}--}}
-<x-delete-confirm-modal title="Category" name="category" delOnly="Category"></x-delete-confirm-modal>
+<x-delete-confirm-modal title="Wallpaper" name="wallpaper" delOnly="Wallpaper"></x-delete-confirm-modal>
 
 @section("foot")
     <script>
@@ -94,7 +94,7 @@
             // get id and links
 
             let id = $(this).attr('id');
-            var url = "{{route('category.destroy',':id')}}";
+            var url = "{{route('wallpapers.destroy',':id')}}";
             url = url.replace(":id",id);
             console.log(id);
             $("form").attr('action',url);

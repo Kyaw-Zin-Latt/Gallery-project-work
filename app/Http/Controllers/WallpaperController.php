@@ -7,6 +7,7 @@ use App\Models\Photo;
 use App\Models\Wallpaper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class WallpaperController extends Controller
 {
@@ -106,7 +107,7 @@ class WallpaperController extends Controller
 
 
 
-        return $request;
+        return redirect()->route("wallpapers.index")->with("message","Wallpaper is added Successfully.");
 
     }
 
@@ -141,7 +142,47 @@ class WallpaperController extends Controller
      */
     public function update(Request $request, Wallpaper $wallpaper)
     {
-        //
+
+        $request->validate([
+            "wallpaper_name" => "required|min:3",
+            "types" => "required",
+            "point" => "required",
+            "cat_id" => "required|exists:categories,id",
+            "color_id" => "required|exists:colors,id",
+//            "wallpaper_search_tags" => "min:3",
+//            "images1" => "required|mimes:jpg,png,gif|file"
+        ]);
+
+//        return $wallpaper->photo;
+        $extension = pathinfo($wallpaper->photo[0]->photo, PATHINFO_EXTENSION);
+
+        $wallpaper->cat_id = $request->cat_id;
+        $wallpaper->color_id = $request->color_id;
+        $wallpaper->wallpaper_name = $request->wallpaper_name;
+        $wallpaper->types = $request->types;
+        if (isset($request->is_recommended)){
+            $wallpaper->is_recommended = 1;
+        }
+        $wallpaper->point = $request->point;
+        $wallpaper->wallpaper_search_tags = $request->wallpaper_search_tags;
+        $wallpaper->credit = $request->credit;
+        if (isset($request->wallpaper_is_published)){
+            $wallpaper->wallpaper_is_published = 1;
+        }else{
+            $wallpaper->wallpaper_is_published = 0;
+
+        }
+        if ($extension="jpg" || $extension="png" || $extension="jpeg") {
+            $wallpaper->is_wallpaper = 1;
+        } elseif($extension="gif") {
+            $wallpaper->is_gif = 1;
+        } else {
+            $wallpaper->is_video_wallpaper = 1;
+        }
+        $wallpaper->added_user_id = Auth::id();
+        $wallpaper->update();
+
+        return redirect()->route("wallpapers.index")->with("message","$request->title is updated successfully.");
     }
 
     /**
@@ -152,6 +193,70 @@ class WallpaperController extends Controller
      */
     public function destroy(Wallpaper $wallpaper)
     {
-        //
+//        return $wallpaper->photo[0]->photo;
+
+
+        if ($wallpaper->is_wallpaper == 1){
+
+            //delete photo from local
+            $wallpaperImageDir = "/public/wallpaper/image/";
+            Storage::delete($wallpaperImageDir.$wallpaper->photo[0]->photo);
+
+            //delete photo from db
+            $wallpaper->photo[0]->delete();
+        }
+
+        //delete wallpaper
+        $title = $wallpaper->wallpaper_name;
+        $wallpaper->delete();
+
+        return redirect()->route("wallpapers.index")->with("message","$title is deleted Successfully.");
+
+
     }
+
+    public function publish(Request $request){
+
+        $request->validate([
+
+            "id" => "exists:wallpapers,wallpaper_id"
+
+        ]);
+
+        $wallpaper = Wallpaper::find($request->id);
+        $wallpaper->wallpaper_is_published = 1;
+        $wallpaper->update();
+
+        if ($wallpaper->update()){
+            return redirect()->route("wallpapers.index")->with("message","Wallpaper is published successfully.");
+        }else{
+            return redirect()->route("wallpapers.index")->with("error","Wallpaper is published unsuccessfully.");
+        }
+
+
+    }
+
+    public function unPublish(Request $request){
+
+        $request->validate([
+
+            "id" => "exists:wallpapers,wallpaper_id"
+
+        ]);
+
+        $wallpaper = Wallpaper::find($request->id);
+        $wallpaper->wallpaper_is_published = 0;
+        $wallpaper->update();
+
+        return redirect()->route("wallpapers.index")->with("message","Wallpaper is unpublished successfully.");
+    }
+
+    public function search(Request $request){
+        $searchKey = $request->searchterm;
+        $categories = Wallpaper::where("title","LIKE","%$searchKey%")->paginate(5);
+
+        return view("wallpaper.search",compact("categories"));
+    }
+
+
 }

@@ -275,11 +275,10 @@
             <!-- card info -->
         </section>
 
-
-
-
-
     </form>
+
+    <x-photo-upload name="wallpaper" id="uploadImage" formId="wallpaper" link="{{ route('photo.update',$p->id) }}"></x-photo-upload>
+
 
 @endsection
 @section("foot")

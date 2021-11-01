@@ -232,6 +232,63 @@ class PhotoController extends Controller
             return redirect()->route("backend_configs.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
         }
 
+        if (isset($request->wallpaper)){
+//            return $request;
+
+            $request->validate([
+                "wallpaper" => "required|mimes:jpg,png,gif|file",
+            ]);
+
+
+            $wallpaperGifDir = "/public/wallpaper/gif";
+            $wallpaperImageDir = "/public/wallpaper/image";
+
+
+
+            $extension = $request->file("wallpaper")->getClientOriginalExtension();
+
+            if ($extension="jpg" || $extension="png" || $extension="jpeg") {
+                //firstly, delete old photo from local
+                Storage::delete($wallpaperImageDir.$photo->photo);
+
+                $wallpaperImageNewFileName = uniqid()."_wallImage.".$request->file("wallpaper")->getClientOriginalExtension();
+
+                //update in local
+                $request->file("wallpaper")->storeAs($wallpaperImageDir,$wallpaperImageNewFileName);
+
+                //update in db
+                $photo->photo = $wallpaperImageNewFileName;
+                $photo->img_height= getimagesize($request->wallpaper)[1];
+                $photo->img_width = getimagesize($request->wallpaper)[0];
+                $photo->update();
+
+
+            } elseif($extension="gif") {
+                //firstly, delete old photo from local
+                Storage::delete($wallpaperGifDir.$photo->photo);
+
+                $wallpaperGifNewFileName = uniqid()."_wallGif".$request->file("wallpaper")->getClientOriginalExtension();
+
+                //update in local
+                $request->file("wallpaper")->storeAs($wallpaperGifDir,$wallpaperGifNewFileName);
+
+                //update in db
+                $photo->photo = $wallpaperGifNewFileName;
+                $photo->img_height= getimagesize($request->wallpaper)[1];
+                $photo->img_width = getimagesize($request->wallpaper)[0];
+                $photo->update();
+
+
+
+            } else {
+                //firstly, delete old photo from local
+                Storage::delete($wallpaperGifDir.$photo->photo);
+            }
+
+
+            return redirect()->route("wallpapers.edit",$photo->parent_id)->with("message","Photo is updated successfully.");
+        }
+
 
         return redirect()->back()->with("message","Photo updated is failed.");
 
