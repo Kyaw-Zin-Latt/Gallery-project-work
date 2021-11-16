@@ -6,6 +6,7 @@ use App\Models\AboutAndSetting;
 use App\Models\BackendConfig;
 use App\Models\Category;
 use App\Models\Photo;
+use App\Models\Role;
 use App\Models\Version;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -37,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
 //        View::share("abouts",AboutAndSetting::first());
         View::share("version",Version::first());
         View::share("backend",BackendConfig::first());
+        View::share("roles",Role::all());
     }
 }

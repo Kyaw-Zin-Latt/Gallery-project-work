@@ -27,7 +27,7 @@
 {{--                <?php endif; ?>--}}
 
                 <form action="" method="post">
-                    @method("DELETE")
+                    @method("delete")
                     @csrf
 
                     <button class="btn btn-sm btn-primary btn-no" type="submit">

@@ -43,6 +43,14 @@
                     </li>
 
                     <li class="nav-item has-treeview ">
+                        <x-menu-title title="Users Management" class="fa fa-fw fa-users"></x-menu-title>
+                        <ul class="nav nav-treeview">
+                            <x-menu-item title="System Users" link="{{ route('user-manager.index') }}"></x-menu-item>
+                            <x-menu-item title="Registered Users" link="{{ route('reg-user-manager.index') }}"></x-menu-item>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview ">
                         <x-menu-title title="Setting" class="fa fa-fw fa-cog"></x-menu-title>
                         <ul class="nav nav-treeview">
                             <x-menu-item title="About & Setting" link="{{ route('abouts.edit') }}"></x-menu-item>
