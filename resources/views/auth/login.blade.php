@@ -3,9 +3,9 @@
 @section("title") Sign In @endsection
 
 @section("content")
-    @foreach($photos as $p)
-        @if($p->img_type == "login-bg")
-    <div class="row" style="height: 100vh !important;background-image: url('{{ asset("storage/backend/login_bg/$p->photo") }}')">
+
+    <div class="row" style="height: 100vh !important;background-image: @foreach($photos as $p) @if($p->img_type == "login-bg") url('{{ asset('storage/backend/login_bg/'.$p->photo) }}') @endif @endforeach">
+
         <div class='container mt-5'>
             <div class='row justify-content-center'>
                 <div class='col-8 col-md-5'>
