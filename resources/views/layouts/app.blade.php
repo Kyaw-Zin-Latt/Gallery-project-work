@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html xmlns:https="http://www.w3.org/1999/xhtml">
+<html xmlns:https="http://www.w3.org/1999/xhtml" t>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
