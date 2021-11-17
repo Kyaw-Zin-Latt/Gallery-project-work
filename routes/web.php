@@ -55,6 +55,11 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
 
 
 
+    Route::resource("/wallpapers","WallpaperController");
+    Route::post("/publish","WallpaperController@publish")->name("wallpapers.publish");
+    Route::post("/unPublish","WallpaperController@unPublish")->name("wallpapers.unPublish");
+
+
     Route::resource("/color","ColorController");
     Route::get("/colors/search","ColorController@search")->name("color.search");
 

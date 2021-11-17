@@ -28,7 +28,7 @@
                         <ul class="nav nav-treeview">
                             <x-menu-item title="Multiple Wallpaper Upload" link="{{ route('home') }}"></x-menu-item>
                             <x-menu-item title="Mass Upload (CSV)" link=""></x-menu-item>
-                            <x-menu-item title="Wallpapers" link=""></x-menu-item>
+                            <x-menu-item title="Wallpapers" link="{{ route('wallpapers.index') }}"></x-menu-item>
                             <x-menu-item title="Colors" link="{{ route('color.index') }}"></x-menu-item>
                             <x-menu-item title="Categories" link="{{ route('category.index') }}"></x-menu-item>
                         </ul>
