@@ -7,10 +7,16 @@
 
 ## Features
 
-- Add Category, Color and Wallpaper
+- CRUD in Category, Color and Wallpaper
 - Search Category and Color
+- Profile Update
 - User Management
-- Setting
+- Filter Sys User and Register User
+- About and Setting update
+- Version update
+- Backend Setting updated
+- change theme by scss
+
 
 
 ##  Run Locally

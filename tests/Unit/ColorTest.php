@@ -12,23 +12,21 @@ class ColorTest extends TestCase
      * @return void
      */
 
-//    public function testLoginPostCorrect()
-//    {
-//        $credential = [
-//            'email' => 'ps@gmail.com',
-//            'password' => '12345678'
-//        ];
-//
-//        $response = $this->post('login',$credential);
-//        $this->assertAuthenticated();
-//    }
+    public function testLoginPostCorrect()
+    {
+        $credential = [
+            'email' => 'ps@gmail.com',
+            'password' => '12345678'
+        ];
+
+        $response = $this->post('login',$credential);
+        $this->assertAuthenticated();
+    }
 
     public function testColorGet()
     {
-
-//        $this->testLoginPostCorrect();
+        $this->testLoginPostCorrect();
         $response = $this->get("dashboard/color");
-//        $response->dump();
-
+        $response->assertStatus(200);
     }
 }

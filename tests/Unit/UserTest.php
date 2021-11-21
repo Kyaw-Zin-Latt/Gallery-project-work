@@ -85,6 +85,12 @@ class UserTest extends TestCase
         $response = $this->get("dashboard/ban/30");
     }
 
+    public function testUnBanRegUser()
+    {
+        $this->testLoginPostCorrect();
+        $response = $this->get("dashboard/unban/30");
+    }
+
 
     public function testRegisterPost()
     {
