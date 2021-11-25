@@ -7,16 +7,10 @@
 
 ## Features
 
-- CRUD in Category, Color and Wallpaper
+- Add Category, Color and Wallpaper
 - Search Category and Color
-- Profile Update
 - User Management
-- Filter Sys User and Register User
-- About and Setting update
-- Version update
-- Backend Setting updated
-- change theme by scss
-
+- Setting
 
 
 ##  Run Locally
@@ -37,7 +31,17 @@ Import db from your cloned project
 
 Go to .env and add your db name
 
+Install files and package
 
+```bash
+  npm Install
+```
+
+And then
+
+```bash
+  npm run watch
+```
 
 Start the server
 
