@@ -7,10 +7,16 @@
 
 ## Features
 
-- Add Category, Color and Wallpaper
+- CRUD in Category, Color and Wallpaper
 - Search Category and Color
+- Profile Update
 - User Management
-- Setting
+- Filter Sys User and Register User
+- About and Setting update
+- Version update
+- Backend Setting updated
+- change theme by scss
+
 
 
 ##  Run Locally
@@ -43,6 +49,7 @@ And then
   npm run watch
 ```
 
+
 Start the server
 
 ```bash
@@ -67,6 +74,9 @@ go to "resources/sass/app.scss" and change you want. After you change, you need 
 **Client:** HTML, CSS, JS, Bootstrap, SCSS 
 
 **Server:** PHP, Laravel 8
+
+
+
 
 
 
