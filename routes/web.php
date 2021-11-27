@@ -30,8 +30,8 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
 
 
     Route::resource("/category",CategoryController::class);
-    Route::post("/publish","CategoryController@publish")->name("category.publish");
-    Route::post("/unPublish","CategoryController@unPublish")->name("category.unPublish");
+    Route::post("/category/publish","CategoryController@publish")->name("category.publish");
+    Route::post("/category/unPublish","CategoryController@unPublish")->name("category.unPublish");
     Route::get("/categories/search","CategoryController@search")->name("category.search");
 
     Route::get("/system_users/search","UserManagerController@search")->name("user-manager.search");
@@ -56,8 +56,9 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
 
 
     Route::resource("/wallpapers","WallpaperController");
-    Route::post("/publish","WallpaperController@publish")->name("wallpapers.publish");
-    Route::post("/unPublish","WallpaperController@unPublish")->name("wallpapers.unPublish");
+    Route::get("/search","WallpaperController@search")->name("wallpapers.search");
+    Route::post("/wallpapers/publish","WallpaperController@publish")->name("wallpapers.publish");
+    Route::post("/wallpapers/unPublish","WallpaperController@unPublish")->name("wallpapers.unPublish");
 
 
     Route::resource("/color","ColorController");

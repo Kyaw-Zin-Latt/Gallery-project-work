@@ -22,6 +22,15 @@
 
                 </div>
 
+                <div class="form-group mr-3">
+                    <select name="status" class="form-control form-control-sm mr-3 ml-3" id="order_by">
+                        <option value="">Select Status</option>
+                        <option value="1" {{ Request()->status == 1 ? "selected" : "" }}>Publish</option>
+                        <option value="0" {{ Request()->status == 0 ? "selected" : "" }}>UnPublish</option>
+                    </select>
+
+                </div>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-sm btn-primary">
                         Search

@@ -252,10 +252,11 @@ class WallpaperController extends Controller
     }
 
     public function search(Request $request){
+//        return $request;
         $searchKey = $request->searchterm;
-        $categories = Wallpaper::where("title","LIKE","%$searchKey%")->paginate(5);
+        $wallpapers = Wallpaper::where("wallpaper_name","LIKE","%$searchKey%")->paginate(5);
 
-        return view("wallpaper.search",compact("categories"));
+        return view("wallpaper.search",compact("wallpapers"));
     }
 
 

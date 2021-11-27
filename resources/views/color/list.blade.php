@@ -39,7 +39,7 @@
                 </tr>
 
             @empty
-                <td colspan="6" class="text-center font-weight-bold h5">There is no Category yet.</td>
+                <td colspan="6" class="text-center font-weight-bold h5">There is no Color yet.</td>
             @endforelse
 
             </tbody>
@@ -51,7 +51,7 @@
 
 <div class="d-flex justify-content-between align-items-center">
 
-    {{ $colors->links() }}
+    {{ $colors->appends(Request::all())->links() }}
     <p class="font-weight-bold h4">Total : <span class="text-primary">{{ $colors->total() }}</span></p>
 
 </div>

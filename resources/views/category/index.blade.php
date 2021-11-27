@@ -21,6 +21,15 @@
 
                 </div>
 
+                <div class="form-group mr-3">
+                    <select name="status" class="form-control form-control-sm mr-3 ml-3" id="order_by">
+                        <option value="">Select Status</option>
+                        <option value="1">Publish</option>
+                        <option value="0">UnPublish</option>
+                    </select>
+
+                </div>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-sm btn-primary">
                         Search

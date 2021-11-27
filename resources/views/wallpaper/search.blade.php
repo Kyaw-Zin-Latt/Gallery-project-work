@@ -18,7 +18,7 @@
                     <div class="form-inline">
                         <div class="form-group">
 
-                            <input type="text" name="searchterm" value="" class="form-control form-control-sm mr-3" placeholder="Search">
+                            <input type="text" name="searchterm" value="{{ Request()->searchterm }}" class="form-control form-control-sm mr-3" placeholder="Search">
 
                         </div>
 
@@ -40,12 +40,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
-
-
             </form>
         </div>
         <div class="col-9">
@@ -68,7 +63,7 @@
     <br>
     {{--    table start--}}
 
-        @include("wallpaper.list")
+    @include("wallpaper.list")
 
     {{--    table end--}}
 

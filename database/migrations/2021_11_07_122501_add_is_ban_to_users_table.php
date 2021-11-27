@@ -14,7 +14,7 @@ class AddIsBanToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer("is_ban")->after("role_id");
+            $table->integer("is_ban")->default('0')->after("role_id");
         });
     }
 
@@ -26,7 +26,7 @@ class AddIsBanToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('is_ban');
         });
     }
 }
