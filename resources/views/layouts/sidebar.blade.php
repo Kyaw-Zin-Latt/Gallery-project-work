@@ -26,21 +26,21 @@
                     <li class="nav-item has-treeview ">
                         <x-menu-title title="Entry" class="fa fa-fw fa-pencil-square-o"></x-menu-title>
                         <ul class="nav nav-treeview">
-                            <x-menu-item title="Multiple Wallpaper Upload" link="{{ route('home') }}"></x-menu-item>
-                            <x-menu-item title="Mass Upload (CSV)" link=""></x-menu-item>
+{{--                            <x-menu-item title="Multiple Wallpaper Upload" link="{{ route('home') }}"></x-menu-item>--}}
+{{--                            <x-menu-item title="Mass Upload (CSV)" link=""></x-menu-item>--}}
                             <x-menu-item title="Wallpapers" link="{{ route('wallpapers.index') }}"></x-menu-item>
                             <x-menu-item title="Colors" link="{{ route('color.index') }}"></x-menu-item>
                             <x-menu-item title="Categories" link="{{ route('category.index') }}"></x-menu-item>
                         </ul>
                     </li>
 
-                    <li class="nav-item has-treeview ">
-                        <x-menu-title title="Approval" class="fa fa-fw fa-check-circle"></x-menu-title>
-                        <ul class="nav nav-treeview">
-                            <x-menu-item title="Pending" link=""></x-menu-item>
-                            <x-menu-item title="Reject" link=""></x-menu-item>
-                        </ul>
-                    </li>
+{{--                    <li class="nav-item has-treeview ">--}}
+{{--                        <x-menu-title title="Approval" class="fa fa-fw fa-check-circle"></x-menu-title>--}}
+{{--                        <ul class="nav nav-treeview">--}}
+{{--                            <x-menu-item title="Pending" link=""></x-menu-item>--}}
+{{--                            <x-menu-item title="Reject" link=""></x-menu-item>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
 
                     <li class="nav-item has-treeview ">
                         <x-menu-title title="Users Management" class="fa fa-fw fa-users"></x-menu-title>

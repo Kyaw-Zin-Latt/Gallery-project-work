@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -201,8 +202,25 @@ class CategoryController extends Controller
     }
 
     public function search(Request $request){
+
+//        DB::enableQueryLog();
         $searchKey = $request->searchterm;
-        $categories = Category::where("title","LIKE","%$searchKey%")->paginate(5);
+        $status = $request->status;
+
+
+        if(!empty($searchKey) && empty($status)) {
+            $categories = Category::where("title","LIKE","%$searchKey%")->paginate(5);
+        }
+
+        if (($status == 0 || $status == 1) && empty($searchKey)) {
+            $categories = Category::where("is_publish","=",$status)->paginate(5);
+        }
+
+        if (!empty($searchKey) && !empty($status)) {
+            $categories = Category::where("title","LIKE","%$searchKey%")->where("is_publish","=",$status)->paginate(5);
+        }
+
+//        dd(DB::getQueryLog());
 
         return view("category.search",compact("categories"));
     }

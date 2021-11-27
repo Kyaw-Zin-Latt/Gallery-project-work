@@ -72,7 +72,7 @@
             </tr>
 
             @empty
-                <td colspan="6" class="text-center font-weight-bold h5">There is no Category yet.</td>
+                <td colspan="10" class="text-center font-weight-bold h5">There is no wallpaper yet.</td>
             @endforelse
 
             </tbody>

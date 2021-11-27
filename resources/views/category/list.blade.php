@@ -74,7 +74,7 @@
 
 
 </div>
-{{ $categories->links() }}
+{{ $categories->appends(Request::all())->links() }}
 <x-delete-confirm-modal title="Category" name="category" delOnly="Category"></x-delete-confirm-modal>
 
 @section("foot")

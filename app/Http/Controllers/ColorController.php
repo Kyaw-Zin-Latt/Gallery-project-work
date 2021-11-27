@@ -117,7 +117,7 @@ class ColorController extends Controller
     }
 
     public function search(Request $request){
-
+        
         $colors = Color::where("name","LIKE","%$request->searchterm%")->paginate(10);
 
         return view("color.search",compact('colors'));
