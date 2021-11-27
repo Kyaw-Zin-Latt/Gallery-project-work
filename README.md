@@ -37,6 +37,17 @@ Import db from your cloned project
 
 Go to .env and add your db name
 
+Install files and package
+
+```bash
+  npm Install
+```
+
+And then
+
+```bash
+  npm run watch
+```
 
 
 Start the server
