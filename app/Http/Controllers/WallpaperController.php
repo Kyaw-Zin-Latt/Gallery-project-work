@@ -142,6 +142,7 @@ class WallpaperController extends Controller
      */
     public function update(Request $request, Wallpaper $wallpaper)
     {
+//        return $request;
 
         $request->validate([
             "wallpaper_name" => "required|min:3",

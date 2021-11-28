@@ -198,7 +198,7 @@
 							</span></a>
                                 </label>
 
-                                <input type="text" name="wallpaper_search_tags" value="" class="form-control form-control-sm" placeholder="Wallpaper Search Tags" id="wallpaper_search_tags">
+                                <input type="text" name="wallpaper_search_tags" value="{{ old("wallpaper_search_tags",$wallpaper->wallpaper_search_tags) }}" class="form-control form-control-sm" placeholder="Wallpaper Search Tags" id="wallpaper_search_tags">
 
                             </div>
 
@@ -210,7 +210,7 @@
 							</span></a>
                                 </label>
 
-                                <input type="text" name="credit" value="" class="form-control form-control-sm" placeholder="Credit" id="credit">
+                                <input type="text" name="credit" value="{{ old("credit",$wallpaper->credit) }}" class="form-control form-control-sm" placeholder="Credit" id="credit">
 
                             </div>
 
@@ -286,10 +286,10 @@
     <script>
         $("#types").change(function() {
             if (this.value == 1) { //3rd radiobutton
-                $("#point").attr("disabled", "disabled");
+                $("#point").attr("readonly", "readonly");
                 $("#point").val(0);
             } else {
-                $("#point").removeAttr("disabled");
+                $("#point").removeAttr("readonly");
             }
         });
     </script>

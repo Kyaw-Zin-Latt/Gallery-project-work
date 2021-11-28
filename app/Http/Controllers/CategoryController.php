@@ -216,7 +216,7 @@ class CategoryController extends Controller
             $categories = Category::where("is_publish","=",$status)->paginate(5);
         }
 
-        if (!empty($searchKey) && !empty($status)) {
+        if (!empty($searchKey) && (!empty($status) || $status == 0)) {
             $categories = Category::where("title","LIKE","%$searchKey%")->where("is_publish","=",$status)->paginate(5);
         }
 
