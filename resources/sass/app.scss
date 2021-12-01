@@ -3,7 +3,11 @@
 $font-family-sans-serif : 'Montserrat', sans-serif;
 
 // Variables
-$primary: #9561e2;
+$primary: #e261a4;
 
 // Bootstrap
 @import '../../public/dashboard/assets/build/scss/AdminLTE';
+
+$swal2-confirm-button-background-color : $primary;
+
+@import "~sweetalert2/src/sweetalert2";

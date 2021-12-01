@@ -76,6 +76,8 @@
         @endguest
 
     <script src="{{ asset("dashboard/assets/jquery/jquery.min.js") }}"></script>
+    <script src="{{ asset("js/app.js") }}"></script>
+            <x-sweet-toast></x-sweet-toast>
         <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -136,6 +138,9 @@
 
     </script>
     @yield("foot")
+
+    <x-sweet-toast></x-sweet-toast>
+
 
 
 </div>

@@ -17,7 +17,17 @@
 
                 <div class="form-group mr-3">
 
-                    <input type="text" name="searchterm" value="" class="form-control form-control-sm" placeholder="Search">
+                    <input id="searchterm" type="text" name="searchterm" value="" class="form-control form-control-sm" placeholder="Search">
+
+                </div>
+
+                <div class="form-group mr-3">
+                    &nbsp; Order By
+                    <select name="order_by" class="form-control form-control-sm mr-3 ml-3" id="order_by">
+                        <option value="">Select Order</option>
+                        <option value="ASC">Name Ascending</option>
+                        <option value="DESC">Name Descending</option>
+                    </select>
 
                 </div>
 
@@ -37,6 +47,7 @@
 
             </form>
         </div>
+
 
         <div class="col-3">
             <a href="{{ route("color.create") }}" class="btn btn-sm btn-primary pull-right">
@@ -59,5 +70,31 @@
 
     {{--    table end--}}
 
+
+@endsection
+
+@section("foot")
+
+
+
+    <script>
+
+       $(document).on('keyup','#searchterm',function () {
+            let search_content = $(this).val();
+            if(search_content != '') {
+                $.ajax({
+                    url:'/dashboard/colors',
+                    method : 'GET',
+                    data:{search_content},
+                    dataType:'json',
+                    success:function (daa) {
+
+                    }
+
+                })
+            }
+       });
+
+    </script>
 
 @endsection
