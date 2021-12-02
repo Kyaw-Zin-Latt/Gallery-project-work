@@ -52,7 +52,7 @@ class ColorController extends Controller
         $color->code = $request->code;
         $color->save();
 
-        return redirect()->route("color.index")->with("message","Color is added successfully.");
+        return redirect()->route("color.index")->with("message",["icon"=>"success","title"=>"Color is added successfully."]);
     }
 
     /**
@@ -98,7 +98,7 @@ class ColorController extends Controller
         $color->code = $request->code;
         $color->update();
 
-        return redirect()->route("color.index")->with("message","Color is updated successfully.");
+        return redirect()->route("color.index")->with("message",["icon"=>"success","title"=>"Color is updated successfully."]);
     }
 
     /**
@@ -112,14 +112,77 @@ class ColorController extends Controller
         $title = $color->name;
         $color->delete();
 
-        return redirect()->route("color.index")->with("message","$title color is deleted successfully.");
+        return redirect()->route("color.index")->with("message",["icon"=>"success","title"=>"$title color is deleted successfully."]);
 
     }
 
     public function search(Request $request){
-        
-        $colors = Color::where("name","LIKE","%$request->searchterm%")->paginate(10);
 
-        return view("color.search",compact('colors'));
+//        return $request;
+
+//        if (!empty($request->order_by) && empty($request)) {
+//            $colors = Color::orderBy('name',$request->order_by)->paginate(10);
+////            return $colors;
+//        } elseif (isset($request->order_by) && isset($request->searchterm)) {
+//            $colors = Color::where("name","LIKE","%$request->searchterm%")->orderBy('name',$request->order_by)->paginate(10);
+//        } elseif (isset($request->searchterm) && empty($request->order_by)) {
+//            $colors = Color::where("name","LIKE","%$request->searchterm%")->paginate(10);
+//        }
+
+        $searchKey = $request->get("searchterm");
+
+        $colors = Color::latest("id")->where("name","LIKE","%$searchKey%")->paginate(10);
+
+        $table_row = $colors->count();
+
+        $output = "" ;
+        if($table_row > 0) {
+
+            foreach ($colors as $color) {
+                $output .= '
+
+                <tr>
+
+                    <td>1</td>
+                    <td>'. $color->name .'</td>
+                    <td>'. $color->code .'</td>
+                     <td>
+                        <div style="width: 30px; height: 30px; background-color: '.$color->code.'; border-radius: 50%"></div>
+                    </td>
+                    <td>
+                        <a href="{{ route(\'color.edit\',$color->id) }}" >
+                            <i style="font-size: 18px;" class="fa fa-pencil-square-o"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ route(\'color.destroy\',$color->id) }}" id="{{ $color->id }}" class="btn-delete" data-toggle="modal" data-target="#myModal">
+                            <i style="font-size: 18px;"  class="fa fa-trash-o"></i>
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                ';
+            }
+
+        } else {
+
+            $output = '
+
+             <td colspan="6" class="text-center font-weight-bold h5">There is no Color yet.</td>
+
+            ';
+
+        }
+
+
+        $data = array(
+            'table_data' => $output,
+        );
+
+        return json_encode($data);
+
+//        return view("color.index",compact('colors'));
     }
 }

@@ -12,12 +12,24 @@
                         @lang('msg.welcome')
                     </h4>
                     <p>
-                        {{ $categories }}
 
+                        <button class="btn btn-success" id="toast">Toast</button>
                     </p>
                 </div>
             </div>
         </div>
     </div>
+
+@endsection
+
+@section("foot")
+
+    <script>
+
+        $("#toast").click(function () {
+
+        })
+
+    </script>
 
 @endsection

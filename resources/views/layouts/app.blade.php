@@ -76,7 +76,48 @@
         @endguest
 
     <script src="{{ asset("dashboard/assets/jquery/jquery.min.js") }}"></script>
-        <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset("js/app.js") }}"></script>
+
+            <script>
+
+                $("body").on('keyup','#searchterm',function () {
+                    let search_content = $(this).val();
+                    console.log(search_content);
+                    if(search_content != '') {
+                        $.ajax({
+                            url:"{{ route('color.search') }}",
+                            method : 'GET',
+                            data:{
+                                searchterm : search_content
+                            },
+                            dataType:'json',
+                            success:function (data) {
+                                console.log(data.table_data);
+                                $('tbody').html(data.table_data);
+                            }
+
+                        })
+                    } else {
+                        $.ajax({
+                            url:"{{ route('color.search') }}",
+                            method : 'GET',
+                            data:{
+                                searchterm : search_content
+                            },
+                            dataType:'json',
+                            success:function (data) {
+                                console.log(data.table_data);
+                                $('tbody').html(data.table_data);
+                            }
+
+                        })
+                    }
+                });
+
+            </script>
+
+
+            <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
@@ -135,7 +176,12 @@
 
 
     </script>
+    <x-sweet-toast></x-sweet-toast>
     @yield("foot")
+
+
+
+
 
 
 </div>

@@ -1,9 +1,8 @@
 
-<div class="card" style="height: auto !important;">
+<div class="card" id="colorTable" style="height: auto !important;">
     <div class="table-responsive animated fadeInRight">
         <table class="table m-0 table-striped">
-            <tbody>
-
+            <thead>
             <tr>
                 <th>No</th>
                 <th>Color Name</th>
@@ -12,7 +11,9 @@
                 <th><span class="th-title">Edit</span></th>
                 <th><span class="th-title">Delete</span></th>
             </tr>
+            </thead>
 
+            <tbody id="dynamic">
             @forelse($colors as $key=>$color)
 
 

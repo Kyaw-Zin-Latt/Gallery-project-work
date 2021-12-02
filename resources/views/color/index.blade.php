@@ -12,31 +12,25 @@
     <div class="row my-3">
 
         <div class="col-9">
-            <form action="{{ route("color.search") }}" class="form-inline" method="get" accept-charset="utf-8">
+            <div class="form-row">
+                <div class="form-group col-3">
 
-
-                <div class="form-group mr-3">
-
-                    <input type="text" name="searchterm" value="" class="form-control form-control-sm" placeholder="Search">
+                    <input id="searchterm" type="text" class="form-control form-control-sm" placeholder="Search">
 
                 </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-sm btn-primary">
-                        Search
-                    </button>
-                </div>
+                <div class="form-group col-3">
 
-                <div class="row">
-                    <div class="form-group ml-3">
-                        <a href="{{ route('color.index') }}" class="btn btn-sm btn-primary">
-                            Reset
-                        </a>
-                    </div>
-                </div>
+                    <select name="order_by" class="form-control form-control-sm" id="order_by">
+                        <option value="">Select Order</option>
+                        <option value="ASC">Name Ascending</option>
+                        <option value="DESC">Name Descending</option>
+                    </select>
 
-            </form>
+                </div>
+            </div>
         </div>
+
 
         <div class="col-3">
             <a href="{{ route("color.create") }}" class="btn btn-sm btn-primary pull-right">
@@ -58,6 +52,11 @@
     @include("color.list")
 
     {{--    table end--}}
+
+
+@endsection
+@section("foot")
+
 
 
 @endsection

@@ -22,6 +22,16 @@
 
                 </div>
 
+                <div class="form-group mr-3">
+                    &nbsp; Order By
+                    <select name="order_by" class="form-control form-control-sm mr-3 ml-3" id="order_by">
+                        <option value="">Select Order</option>
+                        <option value="ASC" {{ Request()->order_by == 'ASC' ? "selected" : "" }}>Name Ascending</option>
+                        <option value="DESC" {{ Request()->order_by == 'DESC' ? "selected" : "" }}>Name Descending</option>
+                    </select>
+
+                </div>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-sm btn-primary">
                         Search
