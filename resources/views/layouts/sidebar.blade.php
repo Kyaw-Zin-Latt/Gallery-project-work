@@ -25,7 +25,7 @@
 
                     <li class="nav-item has-treeview ">
                         <x-menu-title title="Entry" class="fa fa-fw fa-pencil-square-o"></x-menu-title>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav nav-treeview d-block">
 {{--                            <x-menu-item title="Multiple Wallpaper Upload" link="{{ route('home') }}"></x-menu-item>--}}
 {{--                            <x-menu-item title="Mass Upload (CSV)" link=""></x-menu-item>--}}
                             <x-menu-item title="Wallpapers" link="{{ route('wallpapers.index') }}"></x-menu-item>

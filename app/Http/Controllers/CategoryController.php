@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -31,6 +32,7 @@ class CategoryController extends Controller
     {
         return view("category.create");
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -64,8 +66,6 @@ class CategoryController extends Controller
 
 
 
-
-
         if (isset($request->icon)){
             $photo = new Photo();
             $photo->id = "img".uniqid();
@@ -88,7 +88,7 @@ class CategoryController extends Controller
             $photo->save();
         }
 
-        return redirect()->route("category.index")->with("message","Category is added successfully.");
+        return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"Category is added successfully."]);
 
     }
 
@@ -130,7 +130,7 @@ class CategoryController extends Controller
         $category->title = $request->title;
         $category->update();
 
-        return redirect()->route("category.index")->with("message","Category is updated successfully.");
+        return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"Category is updated successfully."]);
     }
 
     /**
@@ -162,7 +162,7 @@ class CategoryController extends Controller
             $title = $category->title;
             $category->delete();
 
-            return redirect()->route("category.index")->with("message","$title is deleted Successfully.");
+            return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"$title is deleted Successfully."]);
 
         }
 
@@ -185,7 +185,7 @@ class CategoryController extends Controller
         $category->update();
 
         if ($category->update()){
-            return redirect()->route("category.index")->with("message","Category is published successfully.");
+            return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"Category is published successfully."]);
         }else{
             return redirect()->route("category.index")->with("error","Category is published unsuccessfully.");
         }
@@ -198,7 +198,7 @@ class CategoryController extends Controller
         $category->is_publish = 0;
         $category->update();
 
-        return redirect()->route("category.index")->with("message","Category is unpublished successfully.");
+        return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"Category is unpublished successfully."]);
     }
 
     public function search(Request $request){
