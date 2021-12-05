@@ -19,7 +19,7 @@ class WallpaperController extends Controller
     public function index()
     {
 
-        $wallpapers = Wallpaper::with(["photo","category","user"])->get();
+        $wallpapers = Wallpaper::with(["photo","category","user"])->latest("wallpaper_id")->get();
 
 
         return view("wallpaper.index",compact("wallpapers"));

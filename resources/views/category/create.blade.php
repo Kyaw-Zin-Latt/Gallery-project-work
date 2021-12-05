@@ -29,7 +29,7 @@
 
                                 <input type="text" name="title" value="" class="form-control form-control-sm @error("title") is-invalid @enderror" placeholder="Category Name" id="cat_name">
                                 @error("title")
-                                    <small class="text-danger font-weight-bold">{{ $message }}</small>
+                                <small class="text-danger font-weight-bold">{{ $message }}</small>
                                 @enderror
                             </div>
 

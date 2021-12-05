@@ -42,11 +42,14 @@
 
     <!-- ChartJS 1.0.1 -->
     <script src={{ asset("dashboard/assets/plugins/chartjs-old/Chart.min.js") }}></script>
+
     <!-- jQuery -->
     <script src={{ asset("dashboard/assets/plugins/jquery/jquery.min.js") }}></script>
     <!-- Image Popup link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
     @yield("head")
 
 </head>
@@ -77,8 +80,13 @@
 
     <script src="{{ asset("dashboard/assets/jquery/jquery.min.js") }}"></script>
     <script src="{{ asset("js/app.js") }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js" integrity="sha512-U2WE1ktpMTuRBPoCFDzomoIorbOyUv0sP8B+INA3EzNAhehbzED1rOJg6bCqPf/Tuposxb5ja/MAUnC8THSbLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script>
+
+
+                $(".nav-treeview li").on("click",function () {
+                    console.log("click");
+                })
 
                 $("body").on('keyup','#searchterm',function () {
                     let search_content = $(this).val();
