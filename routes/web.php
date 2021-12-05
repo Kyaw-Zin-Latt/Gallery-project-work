@@ -73,6 +73,9 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
 
     Route::resource("backend_configs",BackendConfigController::class);
 
+    Route::post("/category/store","CategoryController@dropzone")->name("dropzone");
+    Route::post("category/dropzoneDelete","CategoryController@dropzoneDelete")->name("dropzone.delete");
+
 
 
 

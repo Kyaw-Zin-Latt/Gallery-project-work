@@ -11,4 +11,8 @@ class Category extends Model
     public function photo(){
         return $this->hasMany(Photo::class,"parent_id");
     }
+
+    public function wallpaper(){
+        return $this->hasMany(Wallpaper::class,"cat_id");
+    }
 }

@@ -1,5 +1,6 @@
 window._ = require('lodash');
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import Chart from 'chart.js/auto'
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10,7 +11,9 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
+    window.Chart = Chart;
     window.Swal = Swal;
+
     require('bootstrap');
 } catch (e) {}
 
