@@ -8,9 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class CategoryController extends Controller
 {
+    public function sms()
+    {
+
+        Nexmo::message()->send([
+            'to' => '+959773926994',
+            'from' => '+959773015042',
+            'text' => "Min Ga Lar Par",
+        ]);
+
+        echo "Sended";
+    }
     /**
      * Display a listing of the resource.
      *

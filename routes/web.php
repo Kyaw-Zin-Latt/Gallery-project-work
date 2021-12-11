@@ -1,5 +1,6 @@
 <?php
 
+//use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\CategoryController;
 
@@ -29,7 +30,7 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::post("/update-photo","ProfileController@updatePhoto")->name("profile.updatePhoto");
 
 
-    Route::resource("/category",CategoryController::class);
+    Route::resource("/category",\App\Http\Controllers\CategoryController::class);
     Route::post("/category/publish","CategoryController@publish")->name("category.publish");
     Route::post("/category/unPublish","CategoryController@unPublish")->name("category.unPublish");
     Route::get("/categories/search","CategoryController@search")->name("category.search");
@@ -76,6 +77,7 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::post("/category/store","CategoryController@dropzone")->name("dropzone");
     Route::post("category/dropzoneDelete","CategoryController@dropzoneDelete")->name("dropzone.delete");
 
+//    Route::get("/sms",[CategoryController::class,"sms"])->name("sms");
 
 
 
