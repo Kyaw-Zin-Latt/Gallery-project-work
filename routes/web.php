@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\CategoryController;
 
@@ -76,7 +77,7 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::post("/category/store","CategoryController@dropzone")->name("dropzone");
     Route::post("category/dropzoneDelete","CategoryController@dropzoneDelete")->name("dropzone.delete");
 
-
+    Route::get("/email",[WelcomeMail::class,"build"]);
 
 
 });
