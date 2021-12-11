@@ -1,12 +1,12 @@
 <?php
 
-<<<<<<< HEAD
+
 //use App\Http\Controllers\CategoryController;
-=======
+
 use App\Mail\WelcomeMail;
->>>>>>> 7ea7ce9840d7bb0e6e88bdcaf11eb703460b4906
+
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::post("/update-photo","ProfileController@updatePhoto")->name("profile.updatePhoto");
 
 
-    Route::resource("/category",\App\Http\Controllers\CategoryController::class);
+    Route::resource("/category",CategoryController::class);
     Route::post("/category/publish","CategoryController@publish")->name("category.publish");
     Route::post("/category/unPublish","CategoryController@unPublish")->name("category.unPublish");
     Route::get("/categories/search","CategoryController@search")->name("category.search");
@@ -81,12 +81,10 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::post("/category/store","CategoryController@dropzone")->name("dropzone");
     Route::post("category/dropzoneDelete","CategoryController@dropzoneDelete")->name("dropzone.delete");
 
-<<<<<<< HEAD
-//    Route::get("/sms",[CategoryController::class,"sms"])->name("sms");
 
-=======
+
+
     Route::get("/email",[WelcomeMail::class,"build"]);
->>>>>>> 7ea7ce9840d7bb0e6e88bdcaf11eb703460b4906
 
 
 });
