@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 //use App\Http\Controllers\CategoryController;
+=======
+use App\Mail\WelcomeMail;
+>>>>>>> 7ea7ce9840d7bb0e6e88bdcaf11eb703460b4906
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\CategoryController;
 
@@ -77,8 +81,12 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::post("/category/store","CategoryController@dropzone")->name("dropzone");
     Route::post("category/dropzoneDelete","CategoryController@dropzoneDelete")->name("dropzone.delete");
 
+<<<<<<< HEAD
 //    Route::get("/sms",[CategoryController::class,"sms"])->name("sms");
 
+=======
+    Route::get("/email",[WelcomeMail::class,"build"]);
+>>>>>>> 7ea7ce9840d7bb0e6e88bdcaf11eb703460b4906
 
 
 });
