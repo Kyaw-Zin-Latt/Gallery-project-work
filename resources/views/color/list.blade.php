@@ -50,12 +50,12 @@
 
 </div>
 
-<div class="d-flex justify-content-between align-items-center">
+{{--<div class="d-flex justify-content-between align-items-center">--}}
 
-    {{ $colors->appends(Request::all())->links() }}
-    <p class="font-weight-bold h4">Total : <span class="text-primary">{{ $colors->total() }}</span></p>
+{{--    {{ $colors->appends(Request::all())->links() }}--}}
+{{--    <p class="font-weight-bold h4">Total : <span class="text-primary">{{ $colors->total() }}</span></p>--}}
 
-</div>
+{{--</div>--}}
 
 <x-delete-confirm-modal title="Color" name="color" delOnly="Color"></x-delete-confirm-modal>
 

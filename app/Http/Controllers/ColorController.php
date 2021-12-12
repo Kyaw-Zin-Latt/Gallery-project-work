@@ -150,12 +150,12 @@ class ColorController extends Controller
                         <div style="width: 30px; height: 30px; background-color: '.$color->code.'; border-radius: 50%"></div>
                     </td>
                     <td>
-                        <a href="{{ route(\'color.edit\',$color->id) }}" >
+                        <a href="color/'.$color->id.'/edit" >
                             <i style="font-size: 18px;" class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="{{ route(\'color.destroy\',$color->id) }}" id="{{ $color->id }}" class="btn-delete" data-toggle="modal" data-target="#myModal">
+                        <a href="color/'.$color->id.'/delete" id="{{ $color->id }}" class="btn-delete" data-toggle="modal" data-target="#myModal">
                             <i style="font-size: 18px;"  class="fa fa-trash-o"></i>
                         </a>
 
