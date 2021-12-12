@@ -64,7 +64,7 @@
                         Update
                     </button>
 
-                    <a href="{{ route("category.index") }}" class="btn btn-sm btn-primary">
+                    <a href="{{ route("color.index") }}" class="btn btn-sm btn-primary">
                         Cancel
                     </a>
                 </div>

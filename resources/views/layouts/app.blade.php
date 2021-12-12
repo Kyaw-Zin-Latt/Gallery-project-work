@@ -100,7 +100,7 @@
                             },
                             dataType:'json',
                             success:function (data) {
-                                console.log(data.table_data);
+                                console.log(data);
                                 $('tbody').html(data.table_data);
                             }
 

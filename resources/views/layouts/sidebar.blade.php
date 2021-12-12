@@ -22,10 +22,9 @@
                     <li class="nav-item has-treeview">
                         <x-menu-title title="Dashboard" class="fa fa-fw fa-tachometer" link="{{ route('home') }}"></x-menu-title>
                     </li>
-
-                    <li class="nav-item has-treeview ">
+                    <li class="nav-item has-treeview {{ Request()->url() == route('wallpapers.index') || Request()->url() == route('wallpapers.create') || Request()->url() == route('color.index') || Request()->url() == route('category.index') ? 'menu-open' : '' }}">
                         <x-menu-title title="Entry" class="fa fa-fw fa-pencil-square-o"></x-menu-title>
-                        <ul class="nav nav-treeview d-block">
+                        <ul class="nav nav-treeview">
 {{--                            <x-menu-item title="Multiple Wallpaper Upload" link="{{ route('home') }}"></x-menu-item>--}}
 {{--                            <x-menu-item title="Mass Upload (CSV)" link=""></x-menu-item>--}}
                             <x-menu-item title="Wallpapers" link="{{ route('wallpapers.index') }}"></x-menu-item>
@@ -42,7 +41,7 @@
 {{--                        </ul>--}}
 {{--                    </li>--}}
 
-                    <li class="nav-item has-treeview ">
+                    <li class="nav-item has-treeview {{ Request()->url() == route('user-manager.index') || Request()->url() == route('reg-user-manager.index') ? 'menu-open' : '' }}">
                         <x-menu-title title="Users Management" class="fa fa-fw fa-users"></x-menu-title>
                         <ul class="nav nav-treeview">
                             <x-menu-item title="System Users" link="{{ route('user-manager.index') }}"></x-menu-item>
