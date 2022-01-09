@@ -196,21 +196,37 @@ class CategoryController extends Controller
         $category->is_publish = 1;
         $category->update();
 
-        if ($category->update()){
-            return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"Category is published successfully."]);
-        }else{
-            return redirect()->route("category.index")->with("error","Category is published unsuccessfully.");
-        }
+        return response([
+            "status" => "success",
+            "info" => $category,
+            "icon" => "success",
+            "title" => "Category is published successfully."
+        ]);
+
+//        if ($category->update()){
+//            return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"Category is published successfully."]);
+//        }else{
+//            return redirect()->route("category.index")->with("error","Category is published unsuccessfully.");
+//        }
 
 
     }
 
     public function unPublish(Request $request){
         $category = Category::find($request->id);
+//        return $category;
+
         $category->is_publish = 0;
         $category->update();
 
-        return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"Category is unpublished successfully."]);
+        return response([
+            "status" => "success",
+            "info" => $category,
+            "icon" => "success",
+            "title" => "Category is Unpublished successfully."
+        ]);
+
+//        return redirect()->route("category.index")->with("message",["icon"=>"success","title"=>"Category is unpublished successfully."]);
     }
 
     public function search(Request $request){

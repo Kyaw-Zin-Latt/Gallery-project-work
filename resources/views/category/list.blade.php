@@ -45,15 +45,15 @@
                             <form action="{{ route("category.publish") }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $cateogry->id }}">
-                                <button class="btn btn-sm btn-danger">
+                                <button class="btn btn-sm btn-danger" data-id="{{ $cateogry->id }}" id="pubBtn">
                                     No
                                 </button>
                             </form>
                         @else
-                            <form action="{{ route("category.unPublish") }}" method="post">
+                            <form action="{{ route("category.unPublish") }}" id="unpubForm" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $cateogry->id }}">
-                                <button class="btn btn-sm btn-success">
+                                <button class="btn btn-sm btn-success" data-id="{{ $cateogry->id }}" id="unpubBtn">
                                     Yes
                                 </button>
                             </form>
@@ -90,5 +90,87 @@
             $("form").attr('action',url);
 
         });
+
+        //toast function start
+
+        function showToast(data) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: data.icon,
+                title: data.title
+            })
+        }
+
+        //toast function end
+
+        //unpublist Trigger start
+
+        $(document).delegate("#unpubBtn","click",function (e) {
+            e.preventDefault();
+            let id = $(this).attr("data-id");
+            let btn = $(this);
+
+            console.log(id);
+            axios.post("category/unPublish",{
+                id : id
+            }).then(function (response) {
+                console.log(response);
+                let data = response.data;
+                if(data.status == "success") {
+                    $(btn).attr("id","pubBtn");
+                    $(btn).addClass("btn-danger").text("No").removeClass("btn-success");
+                    showToast(data);
+                }
+            });
+        })
+
+        //unpublist Trigger end
+
+        //publist Trigger start
+
+        $(document).delegate("#pubBtn","click",function (e) {
+            e.preventDefault();
+            let id = $(this).attr("data-id");
+            let btn = $(this);
+
+            console.log(id);
+            axios.post("category/publish",{
+                id : id
+            }).then(function (response) {
+                console.log(response);
+                let data = response.data;
+                if(data.status == "success") {
+
+                    $(btn).attr("id","unpubBtn");
+                    $(btn).addClass("btn-success").text("Yes").removeClass("btn-danger");
+                    showToast(data);
+
+                }
+            });
+        })
+
+        //publist Trigger end
+
+        //delete Trigger start
+
+        $("#delBtn").click(function (e) {
+            e.preventDefault();
+            let id = $(this).parent().attr("id");
+            console.log(id);
+        })
+
+        //delete Trigger end
+
     </script>
 @endsection
